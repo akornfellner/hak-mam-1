@@ -17,11 +17,11 @@ eingetragen. Diese Datei ist immer auf dem aktuellen Stand zu halten.
 
 Jedes Skript wird in **drei Formaten** gerendert:
 
-| Format | Zweck | Inhalt |
-|---|---|---|
-| PDF (Typst) | Skript zum Ausdrucken | vollständig: Erklärungen, Texte, Formeln, Beispiele |
-| HTML | Skript online | vollständig: Erklärungen, Texte, Formeln, Beispiele |
-| revealjs | Folien für den Unterricht | **nur** Formeln und Kernaussagen, **keine** Erklärtexte |
+| Format      | Zweck                     | Inhalt                                                  |
+| ----------- | ------------------------- | ------------------------------------------------------- |
+| PDF (Typst) | Skript zum Ausdrucken     | vollständig: Erklärungen, Texte, Formeln, Beispiele     |
+| HTML        | Skript online             | vollständig: Erklärungen, Texte, Formeln, Beispiele     |
+| revealjs    | Folien für den Unterricht | **nur** Formeln und Kernaussagen, **keine** Erklärtexte |
 
 - Erklärungen und Fließtext stehen nur in PDF und HTML. Sie werden in die Folien
   nicht übernommen.
@@ -38,6 +38,16 @@ Jedes Skript wird in **drei Formaten** gerendert:
 ### Rendern
 
 - Skript (HTML + PDF): `quarto render` → Ausgabe in `_book/`
+- Python läuft aus der Projekt-venv `.venv/` (nicht eingecheckt), verwaltet mit
+  **uv**. `_environment` setzt `QUARTO_PYTHON=.venv/bin/python`, `_quarto.yml`
+  wählt den Kernel `python3`. Ohne das nimmt Quarto irgendeinen anderen
+  installierten Kernel.
+  - Einrichten / nach `git pull` aktualisieren: `uv sync`
+  - Neues Paket fürs Rendern: `uv add paket`; nur als Werkzeug am Rechner (z. B.
+    JupyterLab): `uv add --dev paket`. Nie `pip install` in die `.venv`, das
+    entfernt der nächste `uv sync` wieder.
+  - `pyproject.toml`, `uv.lock` und `.python-version` immer mit committen.
+  - Nicht `python3 -m venv` verwenden (auf dem Arbeitsrechner fehlt `ensurepip`).
 - Folien: `quarto render --profile folien` → Ausgabe in `_folien/`
 - Ein Quarto-Buch kann keine revealjs-Folien erzeugen. Deshalb gibt es das Profil
   `_quarto-folien.yml`, das auf ein normales Projekt umschaltet und nur die
@@ -56,6 +66,12 @@ Jedes Skript wird in **drei Formaten** gerendert:
 - `.github/workflows/pages.yml` rendert bei jedem Push auf `main` nur das HTML
   (`quarto render --to html`) und veröffentlicht `_book/` auf GitHub Pages
   (Deployment über Actions-Artefakt, kein `gh-pages`-Branch).
+- Der Workflow legt mit `uv sync --locked --no-dev` dieselbe `.venv/` an wie
+  lokal (ohne die dev-Werkzeuge), damit die matplotlib-Grafiken auch auf GitHub
+  entstehen. Python-Version steht in `.python-version` (derzeit 3.10),
+  uv-Version im Workflow = lokale Version (derzeit 0.11.9).
+- Neu aufsetzen auf einem anderen Rechner (Quarto und uv installiert):
+  `git clone …`, dann `uv sync`, dann `quarto render`.
 - Quarto-Version im Workflow = lokale Version (derzeit 1.10.18). Bei einem
   Quarto-Update beide anpassen.
 - Actions-Versionen vor Änderungen online prüfen (die Doku hinkt oft hinterher),
@@ -73,7 +89,7 @@ Jedes Skript wird in **drei Formaten** gerendert:
   ```
   Achtung: **nicht** `---` verwenden, das hält Quarto für einen YAML-Block.
 - Faustregel: pro Folie höchstens Definition + Formel + Abbildung. Beispiele bei
-  Bedarf auf eine eigene Folie.
+  Bedarf auf eine eigene Folie. Zahlengeraden: höchstens eine pro Folie.
 
 ## Ordner- und Dateistruktur
 
@@ -83,6 +99,9 @@ _quarto-folien.yml       Profil für die Folien
 _brand.yml               Design (Farben, Schriften, Logo)
 _filters/                Lua-Filter (siehe „Mathematik & Technik“)
 _includes/               Typst-Anpassungen für das PDF
+_python/grafiken.py      Hilfsfunktionen für matplotlib-Grafiken (z. B. Zahlengerade)
+_environment             QUARTO_PYTHON → Projekt-venv
+pyproject.toml           Python-Pakete (uv), dazu uv.lock und .python-version
 index.qmd                Startseite / Vorwort
 NN-kapitelname/          ein Ordner pro Hauptkapitel (01-, 02-, …)
   kapitel-N.qmd          Kapiteldatei: "# Titel" + includes der Unterkapitel
@@ -143,46 +162,56 @@ NN-kapitelname/          ein Ordner pro Hauptkapitel (01-, 02-, …)
   und `$$…$$`). Keine `#def-`/`#exm-`-Blöcke verwenden, die nummeriert Quarto immer.
 - Merksätze: `::: {.callout-important title="Merke"}`
 - Tipps: `::: {.callout-tip title="Tipp: …"}`
-- Abbildungen mit ID und Beschriftung: `![Beschriftung](images/datei.svg){#fig-name width="45%"}`
+- Abbildungen immer mit ID (`fig-…`) und Beschriftung, siehe „Grafiken“.
 - Schreibweisen mit Sprechweise als Tabelle (Spalten „Schreibweise“ | „Sprechweise“).
 
 ## Mathematik & Technik
 
 - Formeln in LaTeX-Mathe-Syntax (`$...$`, `$$...$$`). Quarto übersetzt sie für Typst.
 - Keine Roh-LaTeX-Blöcke, keine eigenen LaTeX-Makros, kein TikZ (funktioniert mit
-  Typst nicht). Grafiken als Bilder oder mit R/Python-Plots erzeugen.
-- Einfache Grafiken (z. B. Venn-Diagramme) als handgeschriebene SVG in `images/`:
-  Linien schwarz `#000000`, Flächen hellrot `#EBA5AB`, Schrift `sans-serif`.
+  Typst nicht).
+- Intervalle in österreichischer Schreibweise mit Strichpunkt und nach außen
+  gedrehten Klammern: `$[2; 5]$`, `$]2; 5[$`, `$[2; \infty[$`, `$]-\infty; 5]$`.
+  Einfach so schreiben, `_filters/intervallklammern.lua` sorgt in PDF, HTML und
+  Folien für richtige Abstände (sonst klebt z. B. „=“ an `[2; 5[`).
 - Mengen mit Dezimalzahlen: Elemente mit Strichpunkt trennen, Dezimalkomma als `{,}`
   schreiben, z. B. `$\{1{,}5;\ 2\}$`.
 - Deutsche Anführungszeichen „…“ direkt im Text verwenden.
+
+### Grafiken
+
+- **Grafiken bevorzugt mit Python/matplotlib erzeugen, nicht als SVG.** Der Code ist
+  **nie sichtbar** (global `echo: false` in `_quarto.yml`, nicht pro Zelle setzen).
+  Handgeschriebene SVG in `images/` nur, wenn es mit matplotlib nicht sinnvoll geht.
+- Grafik-Zelle mit ID und Beschriftung:
+  ````markdown
+  ```{python}
+  #| label: fig-name
+  #| fig-cap: "Beschriftung"
+  zahlengerade(0, 7, intervalle=[(2, 5, True, False)]);
+  ```
+  ````
+  Der Strichpunkt am Ende unterdrückt die Textausgabe des Rückgabewerts.
+- Gemeinsame Funktionen und Farben stehen in `_python/grafiken.py`, eingebunden
+  einmal pro Unterkapitel mit einer Zelle `#| include: false` und
+  `from _python.grafiken import *` (klappt dank `execute-dir: project`).
+  Wiederverwendbare Zeichnungen (Zahlengerade usw.) dort ergänzen, einmalige
+  Grafiken direkt in der Zelle.
+- Zahlengerade: `zahlengerade(von, bis, intervalle=[(a, b, a_dabei, b_dabei)],
+  punkte=[…])`. Randpunkt ausgefüllt = Zahl gehört dazu, leer = gehört nicht
+  dazu; `None` als Rand bedeutet $\pm\infty$.
+- Stil: Linien schwarz `#000000`, Flächen hellrot `#EBA5AB` (Abstufungen heller
+  erlaubt), Markierungen Schulrot `#CE1F2C`, Schrift `sans-serif`, Zahlen mit
+  Dezimalkomma und echtem Minus (`zahl()`). Hintergrund weiß, damit die Grafik
+  im dunklen HTML-Modus lesbar bleibt.
+- Math in Beschriftungen (`fig-cap`) mit doppeltem Backslash: `"$\\mathbb{R}$"`.
+
+### PDF-Korrekturen
+
 - Die PDF-Vorlage „orange-book“ ignoriert einige Einstellungen. Korrekturen dafür:
   - `_includes/typst-anpassungen.typ`: Schrift Lato, kein Absatzeinzug, keine Formelnummern
   - `_filters/pdf-nummerierung.lua`: im PDF nur bis 1.1 nummerieren
   - `_filters/deutsche-anfuehrungszeichen.lua`: korrekte „…“ im PDF
+  - `_filters/intervallklammern.lua`: Intervallklammern (auch für HTML/Folien)
 - Buch-Metadaten (Titel, Untertitel) dürfen nicht mit „1.“ beginnen, sonst macht
   Typst daraus eine Aufzählung.
-
-## Projektspezifisch: hak-mam-1 (1. Klasse)
-
-1. Zahlen und Mengen (`01-zahlen-und-mengen/`)
-   1.1 Die Zahlenmengen · 1.2 Rechnen mit Zahlen · 1.3 Umrechnen von Maßeinheiten ·
-   1.4 Zahlenangabe in Prozent und Promille · Zusammenfassung · Weitere Aufgaben ·
-   Wissens-Check
-2. Terme und Variablen (`02-terme-und-variablen/`)
-   2.1 Grundbegriffe · 2.2 Addition, Subtraktion und Multiplikation von Termen ·
-   2.3 Potenzterme · 2.4 Das Potenzieren eines Binoms · 2.5 Faktorisieren ·
-   2.6 Bruchterme · Zusammenfassung · Vermischte Aufgaben · Weitere Aufgaben zum
-   Üben von Textverständnis und Modellbilden · Wissens-Check
-3. Gleichungen und Formelumwandlungen (`03-gleichungen-und-formelumwandlungen/`)
-   3.1 Grundbegriffe zu den Gleichungen · 3.2 Das Lösen von linearen Gleichungen ohne
-   Rechengerät · 3.3 Lineare Gleichungen mit Bruchzahlen · 3.4 Bruchgleichungen ·
-   3.5 Verhältnisse und Proportionen · 3.6 Umformen von Formeln · 3.7 Vermischte
-   Aufgaben aus Wirtschaft und Geldwesen · 3.8 Mischungsaufgaben und
-   Prozentrechnung · Zusammenfassung · Weitere anwendungsorientierte Aufgaben zur
-   Wiederholung · Wissens-Check
-4. Funktionen (`04-funktionen/`)
-   4.1 Definition und Darstellung der Funktion · 4.2 Die Gleichung der linearen
-   Funktion · 4.3 Einige Anwendungen der Funktion · 4.4 Stückweise lineare
-   Funktionen · 4.5 Die Nullstelle der linearen Funktion · 4.6 Beziehung von zwei
-   Funktionen · 4.7 Indirekt proportionaler Zusammenhang

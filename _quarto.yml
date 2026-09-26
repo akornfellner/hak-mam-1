@@ -1,6 +1,8 @@
 project:
   type: book
   output-dir: _book
+  # Python-Code läuft im Projektordner, damit "from _python.grafiken import *" klappt
+  execute-dir: project
 
 lang: de
 
@@ -14,9 +16,16 @@ book:
 
 number-depth: 2
 
+# Python-Code (matplotlib-Grafiken) wird nie angezeigt, nur das Ergebnis
+jupyter: python3
+execute:
+  echo: false
+  warning: false
+
 filters:
   - _filters/pdf-nummerierung.lua
   - _filters/deutsche-anfuehrungszeichen.lua
+  - _filters/intervallklammern.lua
 
 format:
   html:

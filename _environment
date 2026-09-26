@@ -1,0 +1,2 @@
+# Umgebungsvariablen für Quarto: Python aus der Projekt-venv verwenden
+QUARTO_PYTHON=.venv/bin/python

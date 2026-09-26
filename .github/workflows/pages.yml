@@ -33,6 +33,16 @@ jobs:
         with:
           version: 1.10.18
 
+      - name: uv installieren
+        uses: astral-sh/setup-uv@v7
+        with:
+          version: 0.11.9
+
+      # legt .venv/ genau nach uv.lock an (ohne dev-Werkzeuge), damit
+      # QUARTO_PYTHON aus _environment passt; Python-Version aus .python-version
+      - name: Python-Pakete für die Grafiken installieren
+        run: uv sync --locked --no-dev
+
       - name: Skript als HTML rendern
         run: quarto render --to html
 
