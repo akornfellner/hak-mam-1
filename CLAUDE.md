@@ -27,6 +27,9 @@ auch die Vorlage `/home/alex/Dokumente/Skript/skript-vorlage` nachziehen.
 
 ### Rendern
 
+- Kurzbefehle im `justfile` (Übersicht: `just`): `just preview`, `just folien N`,
+  `just render`, `just render-folien`, `just alles` usw. Neue häufige Befehle dort
+  ergänzen und in README.md nachtragen.
 - Skript: `quarto render` → `_book/`. Folien: `quarto render --profile folien` → `_folien/`.
 - Ein Quarto-Buch kann keine revealjs-Folien erzeugen. Deshalb gibt es das Profil
   `_quarto-folien.yml` (normales Projekt, nur `folien-*.qmd`). Folien-Einstellungen

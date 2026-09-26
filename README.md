@@ -31,20 +31,41 @@ _filters/           Lua-Filter (Nummerierung, Anführungszeichen)
 _includes/          Typst-Anpassungen für das PDF
 index.qmd           Startseite
 01-…/ – 04-…/       ein Ordner pro Kapitel, darin eine Datei pro Unterkapitel
+justfile            Kurzbefehle (just render, just folien 1, …)
 CLAUDE.md           Regeln und Konventionen für dieses Skript
 ```
 
 ## Voraussetzungen
 
 - [Quarto](https://quarto.org/docs/get-started/) ≥ 1.10 (Typst ist enthalten)
+- [uv](https://docs.astral.sh/uv/) für die Python-Umgebung
+- [just](https://just.systems) für die Kurzbefehle (optional)
 - Internetverbindung beim ersten Rendern (Schriften Oswald und Lato werden geladen)
 
 ## Rendern
 
+Die wichtigsten Befehle stehen im `justfile` (Übersicht mit `just`):
+
 ```bash
+just sync            # Python-Umgebung einrichten (einmalig / nach git pull)
+
+just preview         # Skript mit Live-Vorschau (HTML)
+just preview-pdf     # Skript mit Live-Vorschau (PDF)
+just folien 1        # Folien von Kapitel 1 mit Live-Vorschau
+
+just render          # Skript als HTML und PDF → _book/
+just pdf             # nur das PDF
+just render-folien   # alle Folien → _folien/
+just alles           # Skript und Folien
+just aufraeumen      # _book/, _folien/ und .quarto/ löschen
+```
+
+Ohne just:
+
+```bash
+uv sync
 quarto render                    # Skript als HTML und PDF → _book/
 quarto render --profile folien   # Folien → _folien/
-
 quarto preview                   # Skript mit Live-Vorschau
 
 # Folien mit Live-Vorschau (immer eine einzelne Foliendatei angeben)
