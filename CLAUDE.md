@@ -1,217 +1,139 @@
 # CLAUDE.md – Mathematik-Skript HAK/HAS Eferding
 
-Diese Datei gilt für alle Mathematik-Skripte (1.–5. Klasse HAK) und wird in jedes
-Skript-Repository kopiert. Nur der Abschnitt **„Projektspezifisch“** am Ende
-unterscheidet sich zwischen den Skripten.
+Gilt für alle Mathematik-Skripte (1.–5. Klasse HAK) und wird in jedes
+Skript-Repository kopiert. Welche Kapitel und Themen dazukommen, gibt der Benutzer
+jeweils vor.
 
-**Pflege:** Sobald der Benutzer eine neue Regel oder Vorgabe nennt, wird sie hier
-eingetragen. Diese Datei ist immer auf dem aktuellen Stand zu halten.
+**Pflege:** Neue Regeln oder Vorgaben des Benutzers sofort hier eintragen.
 
 ## Allgemein
 
-- Sprache: Deutsch (Österreich). Auch Kommentare, Dateinamen und Commit-Messages
-  auf Deutsch.
-- Werkzeug: Quarto (Buch-Projekt). PDF wird mit **Typst** erzeugt, nicht mit LaTeX.
+- Deutsch (Österreich), auch Kommentare, Dateinamen und Commit-Messages.
+- Quarto-Buchprojekt, PDF mit **Typst** (nicht LaTeX).
 
 ## Ausgabeformate
 
-Jedes Skript wird in **drei Formaten** gerendert:
+| Format | Zweck | Inhalt |
+|---|---|---|
+| PDF (Typst), HTML | Skript | vollständig: Erklärungen, Formeln, Beispiele |
+| revealjs | Folien | **nur** Formeln und Kernaussagen, **keine** Erklärtexte |
 
-| Format      | Zweck                     | Inhalt                                                  |
-| ----------- | ------------------------- | ------------------------------------------------------- |
-| PDF (Typst) | Skript zum Ausdrucken     | vollständig: Erklärungen, Texte, Formeln, Beispiele     |
-| HTML        | Skript online             | vollständig: Erklärungen, Texte, Formeln, Beispiele     |
-| revealjs    | Folien für den Unterricht | **nur** Formeln und Kernaussagen, **keine** Erklärtexte |
-
-- Erklärungen und Fließtext stehen nur in PDF und HTML. Sie werden in die Folien
-  nicht übernommen.
-- Umsetzung mit Quarto-Bedingungen im selben Quelltext, nicht mit doppelten Dateien:
-  ```markdown
-  ::: {.content-hidden when-format="revealjs"}
-  Erklärender Text, nur im Skript (PDF + HTML).
-  :::
-  ```
-  Formeln, Definitionen, Beispiele und Merksätze stehen ohne Bedingung und erscheinen
-  damit überall. Nur für Folien bestimmte Inhalte: `::: {.content-visible when-format="revealjs"}`.
-- Einführungsbeispiele sind Erklärtext und kommen daher **nicht** in die Folien.
+- Alles im selben Quelltext. Erklärtext (auch Einführungsbeispiele) steht in
+  `::: {.content-hidden when-format="revealjs"}`. Formeln, Definitionen, Beispiele
+  und Merksätze stehen ohne Bedingung. Nur für Folien:
+  `::: {.content-visible when-format="revealjs"}`.
 
 ### Rendern
 
-- Skript (HTML + PDF): `quarto render` → Ausgabe in `_book/`
-- Python läuft aus der Projekt-venv `.venv/` (nicht eingecheckt), verwaltet mit
-  **uv**. `_environment` setzt `QUARTO_PYTHON=.venv/bin/python`, `_quarto.yml`
-  wählt den Kernel `python3`. Ohne das nimmt Quarto irgendeinen anderen
-  installierten Kernel.
-  - Einrichten / nach `git pull` aktualisieren: `uv sync`
-  - Neues Paket fürs Rendern: `uv add paket`; nur als Werkzeug am Rechner (z. B.
-    JupyterLab): `uv add --dev paket`. Nie `pip install` in die `.venv`, das
-    entfernt der nächste `uv sync` wieder.
-  - `pyproject.toml`, `uv.lock` und `.python-version` immer mit committen.
-  - Nicht `python3 -m venv` verwenden (auf dem Arbeitsrechner fehlt `ensurepip`).
-- Folien: `quarto render --profile folien` → Ausgabe in `_folien/`
+- Skript: `quarto render` → `_book/`. Folien: `quarto render --profile folien` → `_folien/`.
 - Ein Quarto-Buch kann keine revealjs-Folien erzeugen. Deshalb gibt es das Profil
-  `_quarto-folien.yml`, das auf ein normales Projekt umschaltet und nur die
-  Foliendateien rendert. Folien-Einstellungen gehören in dieses Profil, nicht in die
-  einzelnen Foliendateien.
-- Das Folien-Logo hat einen absoluten Pfad (`/hak-logo.png`). Es erscheint daher nur,
-  wenn die Folien über einen Webserver geöffnet werden, nicht beim Doppelklick auf die
-  HTML-Datei.
-- Folien-Preview immer mit einer einzelnen Datei:
+  `_quarto-folien.yml` (normales Projekt, nur `folien-*.qmd`). Folien-Einstellungen
+  gehören dorthin, nicht in die Foliendateien.
+- Folien-Preview nur mit einer einzelnen Datei:
   `quarto preview 01-zahlen-und-mengen/folien-1.qmd --profile folien`.
-  `quarto preview --profile folien` allein funktioniert nicht (kein `index.qmd` im
-  Folien-Profil).
+- Das Folien-Logo (`/hak-logo.png`, absoluter Pfad) erscheint nur über einen
+  Webserver, nicht beim Öffnen der HTML-Datei per Doppelklick.
+- Python: Projekt-venv `.venv/`, verwaltet mit **uv** (`pyproject.toml`, `uv.lock`,
+  `.python-version` immer mitcommitten). `_environment` setzt
+  `QUARTO_PYTHON=.venv/bin/python`, sonst nimmt Quarto einen fremden Kernel.
+  - Einrichten / nach `git pull`: `uv sync`
+  - Paket fürs Rendern: `uv add paket`, nur als Werkzeug am Rechner: `uv add --dev paket`
+  - Nie `pip install` in die `.venv` (entfernt der nächste `uv sync`), nie
+    `python3 -m venv` (auf dem Arbeitsrechner fehlt `ensurepip`).
+- Neuer Rechner: `git clone …`, `uv sync`, `quarto render`.
 
 ### Veröffentlichung
 
-- `.github/workflows/pages.yml` rendert bei jedem Push auf `main` nur das HTML
-  (`quarto render --to html`) und veröffentlicht `_book/` auf GitHub Pages
-  (Deployment über Actions-Artefakt, kein `gh-pages`-Branch).
-- Der Workflow legt mit `uv sync --locked --no-dev` dieselbe `.venv/` an wie
-  lokal (ohne die dev-Werkzeuge), damit die matplotlib-Grafiken auch auf GitHub
-  entstehen. Python-Version steht in `.python-version` (derzeit 3.10),
-  uv-Version im Workflow = lokale Version (derzeit 0.11.9).
-- Neu aufsetzen auf einem anderen Rechner (Quarto und uv installiert):
-  `git clone …`, dann `uv sync`, dann `quarto render`.
-- Quarto-Version im Workflow = lokale Version (derzeit 1.10.18). Bei einem
-  Quarto-Update beide anpassen.
-- Actions-Versionen vor Änderungen online prüfen (die Doku hinkt oft hinterher),
-  z. B. mit `git ls-remote --tags https://github.com/actions/deploy-pages.git`.
+- `.github/workflows/pages.yml`: bei jedem Push auf `main` nur HTML rendern
+  (`uv sync --locked --no-dev`, `quarto render --to html`) und `_book/` per
+  Actions-Artefakt auf GitHub Pages veröffentlichen.
+- Quarto- und uv-Version im Workflow = lokale Version (derzeit Quarto 1.10.18,
+  uv 0.11.9). Bei einem Update beide anpassen.
+- Actions-Versionen vor Änderungen online prüfen, z. B.
+  `git ls-remote --tags https://github.com/actions/deploy-pages.git`.
 
 ### Folien-Aufteilung
 
-- `slide-level: 4`: Überschriften `#` bis `###` werden Titel-/Abschnittsfolien (mit
-  ihrem direkten Inhalt), jede `####`-Überschrift beginnt eine neue Folie.
-- Wird eine Folie zu voll, einen Umbruch einfügen, der nur in den Folien wirkt:
+- `slide-level: 4`: `#` bis `###` werden Titel-/Abschnittsfolien, jede `####`
+  beginnt eine neue Folie.
+- Zu volle Folie: Umbruch, der nur in den Folien wirkt (**nicht** `---`, das hält
+  Quarto für YAML):
   ```markdown
   ::: {.content-visible when-format="revealjs"}
   * * *
   :::
   ```
-  Achtung: **nicht** `---` verwenden, das hält Quarto für einen YAML-Block.
-- Faustregel: pro Folie höchstens Definition + Formel + Abbildung. Beispiele bei
-  Bedarf auf eine eigene Folie. Zahlengeraden: höchstens eine pro Folie.
+- Pro Folie höchstens Definition + Formel + Abbildung, höchstens eine
+  Zahlengerade. Beispiele bei Bedarf auf eine eigene Folie.
 
 ## Ordner- und Dateistruktur
 
 ```
-_quarto.yml              Projekt-Konfiguration (Buch: HTML + PDF)
-_quarto-folien.yml       Profil für die Folien
-_brand.yml               Design (Farben, Schriften, Logo)
-_filters/                Lua-Filter (siehe „Mathematik & Technik“)
-_includes/               Typst-Anpassungen für das PDF
-_python/grafiken.py      Hilfsfunktionen für matplotlib-Grafiken (z. B. Zahlengerade)
-_environment             QUARTO_PYTHON → Projekt-venv
-pyproject.toml           Python-Pakete (uv), dazu uv.lock und .python-version
+_quarto.yml, _quarto-folien.yml, _brand.yml
+_filters/, _includes/    Korrekturen für PDF und Mathe (siehe unten)
+_python/grafiken.py      gemeinsame matplotlib-Funktionen
 index.qmd                Startseite / Vorwort
-NN-kapitelname/          ein Ordner pro Hauptkapitel (01-, 02-, …)
-  kapitel-N.qmd          Kapiteldatei: "# Titel" + includes der Unterkapitel
-  folien-N.qmd           Folien: nur Titel + dieselben includes wie kapitel-N.qmd
+NN-kapitelname/          ein Ordner pro Kapitel (01-, 02-, …)
+  kapitel-N.qmd          "# Titel" + includes der Unterkapitel
+  folien-N.qmd           nur Titel + dieselben includes
   _N-M-thema.qmd         Unterkapitel N.M, beginnt mit "## Titel"
-  _zusammenfassung.qmd   nicht nummeriert
-  _weitere-aufgaben.qmd  nicht nummeriert
-  _wissens-check.qmd     nicht nummeriert
-  images/                Bilder dieses Kapitels
+  _zusammenfassung.qmd, _weitere-aufgaben.qmd, _wissens-check.qmd  ({.unnumbered})
+  images/
 ```
 
-- Niemals alles in eine Datei schreiben.
-- In `_quarto.yml` werden nur die Kapiteldateien (`kapitel-N.qmd`) eingetragen. Die
-  Unterkapitel werden per `{{< include _N-M-thema.qmd >}}` eingebunden. So
-  nummeriert Quarto korrekt 1.1, 1.2, … statt jede Datei als eigenes Kapitel zu zählen.
-- Unterkapitel-Dateien beginnen mit `_`, damit Quarto sie nicht einzeln rendert.
-- Überschriften-Ebenen: `#` Kapitel (1), `##` Unterkapitel (1.1), `###` Thema im
-  Unterkapitel, `####` Teilthema. Nummeriert wird nur bis 1.1 (`number-depth: 2`).
-- Jede Überschrift bekommt eine ID mit `sec-`, z. B. `### Teilmengen {#sec-teilmengen}`.
-- Zusammenfassung, Weitere Aufgaben, Wissens-Check usw. bekommen `{.unnumbered}`.
-- Dateinamen: Kleinbuchstaben, Bindestriche, keine Umlaute/ß (ä→ae, ö→oe, ü→ue, ß→ss).
+- Niemals alles in eine Datei schreiben. In `_quarto.yml` nur `kapitel-N.qmd`
+  eintragen, Unterkapitel per `{{< include _N-M-thema.qmd >}}` (sonst stimmt die
+  Nummerierung 1.1, 1.2, … nicht). Unterkapitel-Dateien beginnen mit `_`.
+- Überschriften: `#` Kapitel, `##` Unterkapitel, `###` Thema, `####` Teilthema.
+  Nummeriert wird nur bis 1.1. Jede Überschrift bekommt eine ID `{#sec-…}`.
+- Dateinamen: Kleinbuchstaben, Bindestriche, keine Umlaute/ß (ä→ae, ß→ss).
 
 ## Design
 
-- Das gesamte Design kommt aus `_brand.yml`. In `.qmd`-Dateien keine Farben oder
-  Schriften hart codieren.
-- Schulfarben: **Rot `#CE1F2C`** (aus dem Schullogo) und **Schwarz `#000000`**
-  (reines Schwarz, kein „Fast-Schwarz“).
-- Schriften: Oswald (Überschriften), Lato (Fließtext).
-- Logo: `hak-logo.png` im Projektordner, dazu `hak-logo-dunkel.png` (weiße Buchstaben)
-  für den dunklen HTML-Modus.
-- HTML hat einen Umschalter hell/dunkel: `cosmo` (hell) und `darkly` (dunkel), jeweils
-  mit `brand` als letztem Eintrag, damit `_brand.yml` Vorrang hat.
-- Im dunklen Modus wird statt des Schulrots das hellere Rot `#F0616B` verwendet
-  (Schulrot hätte auf `#222222` zu wenig Kontrast). PDF und Folien sind immer hell.
-- Neue Farben in `_brand.yml` immer mit `light`- und `dark`-Variante anlegen, wenn sie
-  im HTML sichtbar sind.
+- Design nur in `_brand.yml`, keine Farben oder Schriften in `.qmd`-Dateien.
+  Neue Farben, die im HTML sichtbar sind, mit `light`- und `dark`-Variante.
+- Schulfarben: Rot `#CE1F2C`, reines Schwarz `#000000`. Schriften: Oswald
+  (Überschriften), Lato (Text). Logo `hak-logo.png`, im dunklen HTML-Modus
+  `hak-logo-dunkel.png`.
+- HTML hat hell/dunkel (`cosmo`/`darkly`, jeweils `brand` zuletzt). PDF und Folien
+  sind immer hell.
 
 ## Inhaltliche Bausteine
 
 - **Jedes Thema beginnt mit einem Einführungsbeispiel** aus dem Alltag der
-  Schülerinnen und Schüler, danach folgt die Mathematik. Kein Callout, sondern normaler
-  Text mit fettem Label (wie bei Beispielen):
-  ```markdown
-  ::: {.content-hidden when-format="revealjs"}
-  **Einführungsbeispiel:** …
-  :::
-  ```
-- `callout-note` ist **ausschließlich** für Definitionen reserviert.
-- Definitionen immer als Callout, **ohne Nummer**:
-  ```markdown
-  ::: {.callout-note title="Definition: Titel"}
-  …
-  :::
-  ```
-- Beispiele **ohne Nummer**, als normaler Absatz mit fettem Label:
-  `**Beispiel:** Gegeben ist …` (bei reiner Formel: `**Beispiel:**`, dann Leerzeile
-  und `$$…$$`). Keine `#def-`/`#exm-`-Blöcke verwenden, die nummeriert Quarto immer.
-- Merksätze: `::: {.callout-important title="Merke"}`
-- Tipps: `::: {.callout-tip title="Tipp: …"}`
-- Abbildungen immer mit ID (`fig-…`) und Beschriftung, siehe „Grafiken“.
-- Schreibweisen mit Sprechweise als Tabelle (Spalten „Schreibweise“ | „Sprechweise“).
+  Schülerinnen und Schüler: normaler Text `**Einführungsbeispiel:** …` in
+  `content-hidden when-format="revealjs"`, kein Callout.
+- Definitionen: `::: {.callout-note title="Definition: Titel"}`. `callout-note` ist
+  **nur** für Definitionen.
+- Beispiele: Absatz `**Beispiel:** …` (bei reiner Formel danach Leerzeile + `$$…$$`).
+- Merksätze: `callout-important title="Merke"`, Tipps: `callout-tip title="Tipp: …"`.
+- Nichts nummerieren außer Abbildungen: keine `#def-`/`#exm-`-Blöcke.
+- Schreibweisen als Tabelle mit den Spalten „Schreibweise“ | „Sprechweise“.
 
 ## Mathematik & Technik
 
-- Formeln in LaTeX-Mathe-Syntax (`$...$`, `$$...$$`). Quarto übersetzt sie für Typst.
-- Keine Roh-LaTeX-Blöcke, keine eigenen LaTeX-Makros, kein TikZ (funktioniert mit
-  Typst nicht).
-- Intervalle in österreichischer Schreibweise mit Strichpunkt und nach außen
-  gedrehten Klammern: `$[2; 5]$`, `$]2; 5[$`, `$[2; \infty[$`, `$]-\infty; 5]$`.
-  Einfach so schreiben, `_filters/intervallklammern.lua` sorgt in PDF, HTML und
-  Folien für richtige Abstände (sonst klebt z. B. „=“ an `[2; 5[`).
-- Mengen mit Dezimalzahlen: Elemente mit Strichpunkt trennen, Dezimalkomma als `{,}`
-  schreiben, z. B. `$\{1{,}5;\ 2\}$`.
-- Deutsche Anführungszeichen „…“ direkt im Text verwenden.
+- Formeln in LaTeX-Mathe-Syntax (`$…$`, `$$…$$`). Keine Roh-LaTeX-Blöcke, keine
+  eigenen Makros, kein TikZ (geht mit Typst nicht).
+- Dezimalkomma als `{,}`, Elemente in Mengen mit Dezimalzahlen durch Strichpunkt
+  trennen: `$\{1{,}5;\ 2\}$`.
+- Intervalle österreichisch: `$[2; 5]$`, `$]2; 5[$`, `$]-\infty; 5]$`. Einfach so
+  schreiben, die Abstände korrigiert `_filters/intervallklammern.lua`.
+- Deutsche Anführungszeichen „…“ direkt im Text.
+- Buch-Titel/-Untertitel nicht mit „1.“ beginnen (Typst macht eine Aufzählung daraus).
+- Korrekturen für die PDF-Vorlage „orange-book“ und Mathe stehen in
+  `_includes/typst-anpassungen.typ` und `_filters/*.lua` (Zweck jeweils im
+  Dateikopf). Neue Korrekturen dort ergänzen, nicht in den `.qmd`-Dateien.
 
 ### Grafiken
 
-- **Grafiken bevorzugt mit Python/matplotlib erzeugen, nicht als SVG.** Der Code ist
-  **nie sichtbar** (global `echo: false` in `_quarto.yml`, nicht pro Zelle setzen).
-  Handgeschriebene SVG in `images/` nur, wenn es mit matplotlib nicht sinnvoll geht.
-- Grafik-Zelle mit ID und Beschriftung:
-  ````markdown
-  ```{python}
-  #| label: fig-name
-  #| fig-cap: "Beschriftung"
-  zahlengerade(0, 7, intervalle=[(2, 5, True, False)]);
-  ```
-  ````
-  Der Strichpunkt am Ende unterdrückt die Textausgabe des Rückgabewerts.
-- Gemeinsame Funktionen und Farben stehen in `_python/grafiken.py`, eingebunden
-  einmal pro Unterkapitel mit einer Zelle `#| include: false` und
-  `from _python.grafiken import *` (klappt dank `execute-dir: project`).
-  Wiederverwendbare Zeichnungen (Zahlengerade usw.) dort ergänzen, einmalige
-  Grafiken direkt in der Zelle.
-- Zahlengerade: `zahlengerade(von, bis, intervalle=[(a, b, a_dabei, b_dabei)],
-  punkte=[…])`. Randpunkt ausgefüllt = Zahl gehört dazu, leer = gehört nicht
-  dazu; `None` als Rand bedeutet $\pm\infty$.
-- Stil: Linien schwarz `#000000`, Flächen hellrot `#EBA5AB` (Abstufungen heller
-  erlaubt), Markierungen Schulrot `#CE1F2C`, Schrift `sans-serif`, Zahlen mit
-  Dezimalkomma und echtem Minus (`zahl()`). Hintergrund weiß, damit die Grafik
-  im dunklen HTML-Modus lesbar bleibt.
-- Math in Beschriftungen (`fig-cap`) mit doppeltem Backslash: `"$\\mathbb{R}$"`.
-
-### PDF-Korrekturen
-
-- Die PDF-Vorlage „orange-book“ ignoriert einige Einstellungen. Korrekturen dafür:
-  - `_includes/typst-anpassungen.typ`: Schrift Lato, kein Absatzeinzug, keine Formelnummern
-  - `_filters/pdf-nummerierung.lua`: im PDF nur bis 1.1 nummerieren
-  - `_filters/deutsche-anfuehrungszeichen.lua`: korrekte „…“ im PDF
-  - `_filters/intervallklammern.lua`: Intervallklammern (auch für HTML/Folien)
-- Buch-Metadaten (Titel, Untertitel) dürfen nicht mit „1.“ beginnen, sonst macht
-  Typst daraus eine Aufzählung.
+- **Grafiken mit Python/matplotlib, Code nie sichtbar** (global `echo: false`).
+  Handgeschriebene SVG nur, wenn es mit matplotlib nicht sinnvoll geht.
+- Pro Unterkapitel einmal eine Zelle mit `#| include: false` und
+  `from _python.grafiken import *`. Wiederverwendbare Zeichnungen (z. B.
+  `zahlengerade()`) in `_python/grafiken.py`, einmalige direkt in der Zelle.
+- Jede Grafik-Zelle hat `#| label: fig-…` und `#| fig-cap: "…"`. Die letzte Zeile
+  endet mit `;`, damit keine Textausgabe erscheint. Mathe in `fig-cap` mit doppeltem
+  Backslash: `"$\\mathbb{R}$"`.
+- Stil: Linien schwarz, Flächen hellrot `#EBA5AB` (hellere Abstufungen erlaubt),
+  Markierungen Schulrot, Schrift sans-serif, weißer Hintergrund (lesbar im dunklen
+  Modus), Zahlen mit Dezimalkomma und echtem Minus (`zahl()`).
