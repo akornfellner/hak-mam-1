@@ -20,8 +20,11 @@ local function geschuetzt(davor)
 end
 
 local function typst(el)
+  -- Dezimalkomma {,} ohne Abstand setzen (siehe dezimalkomma.lua)
+  el.text = el.text:gsub("{,}", "\\text{DEZIMALKOMMA}")
   local code = pandoc.write(pandoc.Pandoc({ pandoc.Plain({ el }) }), "typst")
   code = code:gsub("%s+$", "")
+  code = code:gsub('upright%("DEZIMALKOMMA"%)', 'class("normal", \\,)')
   code = code:gsub("()\\([%[%]])", function(pos, klammer)
     local rolle = schliesst(code:sub(1, pos - 1)) and "closing" or "opening"
     return ' class("' .. rolle .. '", \\' .. klammer .. ") "

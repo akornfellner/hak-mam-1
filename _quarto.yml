@@ -26,6 +26,7 @@ filters:
   - _filters/pdf-nummerierung.lua
   - _filters/deutsche-anfuehrungszeichen.lua
   - _filters/intervallklammern.lua
+  - _filters/dezimalkomma.lua
 
 format:
   html:

@@ -4,7 +4,9 @@ Gilt für alle Mathematik-Skripte (1.–5. Klasse HAK) und wird in jedes
 Skript-Repository kopiert. Welche Kapitel und Themen dazukommen, gibt der Benutzer
 jeweils vor.
 
-**Pflege:** Neue Regeln oder Vorgaben des Benutzers sofort hier eintragen.
+**Pflege:** Neue Regeln oder Vorgaben des Benutzers sofort hier eintragen. Gilt eine
+Regel für alle Skripten oder ändert sich die Infrastruktur (Filter, Typst, Workflow),
+auch die Vorlage `/home/alex/Dokumente/Skript/skript-vorlage` nachziehen.
 
 ## Allgemein
 
@@ -115,7 +117,8 @@ NN-kapitelname/          ein Ordner pro Kapitel (01-, 02-, …)
 - Formeln in LaTeX-Mathe-Syntax (`$…$`, `$$…$$`). Keine Roh-LaTeX-Blöcke, keine
   eigenen Makros, kein TikZ (geht mit Typst nicht).
 - Dezimalkomma als `{,}`, Elemente in Mengen mit Dezimalzahlen durch Strichpunkt
-  trennen: `$\{1{,}5;\ 2\}$`.
+  trennen: `$\{1{,}5;\ 2\}$`. Den Abstand nach dem Komma im PDF entfernt
+  `_filters/dezimalkomma.lua`.
 - Intervalle österreichisch: `$[2; 5]$`, `$]2; 5[$`, `$]-\infty; 5]$`. Einfach so
   schreiben, die Abstände korrigiert `_filters/intervallklammern.lua`.
 - Deutsche Anführungszeichen „…“ direkt im Text.
