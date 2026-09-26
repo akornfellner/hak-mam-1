@@ -1,0 +1,240 @@
+## Die Zahlenmengen {#sec-zahlenmengen}
+
+### Was ist eine Menge? {#sec-menge}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** Die 1A fährt auf Wandertag. Der Klassenvorstand schreibt eine Liste mit allen, die
+mitfahren. Auf dieser Liste
+
+- steht jede Person **genau einmal**, denn niemand wird doppelt gezählt,
+- ist die **Reihenfolge egal**, denn ob Anna oder Ben zuerst steht, ändert nichts
+  daran, wer mitfährt,
+- ist bei jeder Person **eindeutig**, ob sie auf der Liste steht oder nicht.
+
+So eine Zusammenfassung von Dingen nennt man in der Mathematik eine **Menge**.
+:::
+
+::: {.callout-note title="Definition: Menge"}
+Eine **Menge** ist eine Zusammenfassung von unterscheidbaren Objekten zu einem Ganzen.
+Die Objekte heißen **Elemente** der Menge.
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Mengen bezeichnet man mit Großbuchstaben. Die Elemente stehen in geschwungenen
+Klammern. Es gibt zwei Schreibweisen:
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+**Aufzählende Schreibweise:** Alle Elemente werden aufgelistet.
+
+$$
+V = \{a, e, i, o, u\}
+$$
+
+**Beschreibende Schreibweise:** Man gibt eine Eigenschaft an, die genau die Elemente
+der Menge haben.
+
+$$
+V = \{x \mid x \text{ ist ein Vokal}\}
+$$
+
+::: {.content-hidden when-format="revealjs"}
+Man liest: „$V$ ist die Menge aller $x$, für die gilt: $x$ ist ein Vokal.“
+
+Die Reihenfolge der Elemente spielt keine Rolle, und jedes Element wird nur einmal
+angeschrieben:
+:::
+
+$$
+\{1, 2, 3\} = \{3, 1, 2\}
+$$
+
+::: {.content-hidden when-format="revealjs"}
+::: {.callout-tip title="Tipp: Dezimalzahlen in Mengen"}
+In Österreich schreibt man das Komma als Dezimaltrennzeichen. Kommen in einer Menge
+Dezimalzahlen vor, trennt man die Elemente daher mit einem **Strichpunkt**:
+$\{1{,}5;\ 2;\ 3{,}75\}$.
+:::
+
+Eine Menge kann auch gar keine Elemente enthalten, zum Beispiel die Menge aller
+Monate mit 32 Tagen.
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.callout-note title="Definition: Leere Menge"}
+Eine Menge ohne Elemente heißt **leere Menge**. Man schreibt $\{\,\}$ oder $\emptyset$.
+:::
+
+### Element oder nicht Element {#sec-element}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** Die Menge der Tage am Wochenende ist $W = \{\text{Samstag}, \text{Sonntag}\}$.
+
+- Ist der Samstag ein Wochenendtag? **Ja**, der Samstag gehört zur Menge $W$.
+- Ist der Montag ein Wochenendtag? **Nein**, der Montag gehört nicht zur Menge $W$.
+
+Für „gehört dazu“ und „gehört nicht dazu“ gibt es in der Mathematik eigene Zeichen.
+:::
+
+::: {.callout-note title="Definition: Element"}
+| Schreibweise | Sprechweise |
+|---|---|
+| $a \in M$ | $a$ ist Element von $M$ |
+| $a \notin M$ | $a$ ist nicht Element von $M$ |
+:::
+
+**Beispiel:** Gegeben ist $A = \{2, 4, 6, 8\}$.
+
+$$
+4 \in A \qquad 8 \in A \qquad 5 \notin A \qquad 10 \notin A
+$$
+
+### Teilmengen {#sec-teilmengen}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** $K$ ist die Menge aller Schülerinnen und Schüler der 1A. $F$ ist die Menge aller
+Schülerinnen und Schüler der 1A, die Fußball spielen.
+
+Jede Person aus $F$ ist auch in $K$, denn wer in der 1A Fußball spielt, geht
+natürlich auch in die 1A. Die Menge $F$ ist also ein **Teil** der Menge $K$.
+:::
+
+::: {.callout-note title="Definition: Teilmenge"}
+$A$ ist eine **Teilmenge** von $B$, wenn jedes Element von $A$ auch Element von $B$ ist.
+
+| Schreibweise | Sprechweise |
+|---|---|
+| $A \subseteq B$ | $A$ ist Teilmenge von $B$ |
+| $A \subset B$ | $A$ ist echte Teilmenge von $B$ ($B$ hat mindestens ein Element mehr) |
+| $A \not\subseteq B$ | $A$ ist keine Teilmenge von $B$ |
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+![$A \subseteq B$: Alle Elemente von $A$ liegen auch in $B$.](images/venn-teilmenge.svg){#fig-teilmenge width="45%"}
+
+**Beispiel:** Gegeben sind $A = \{1, 2\}$, $B = \{1, 2, 3\}$ und $C = \{2, 5\}$.
+
+$$
+A \subseteq B \qquad A \subset B \qquad B \not\subseteq A \qquad C \not\subseteq B \text{ (weil } 5 \notin B)
+$$
+
+::: {.callout-important title="Merke"}
+- Jede Menge ist Teilmenge von sich selbst: $M \subseteq M$
+- Die leere Menge ist Teilmenge jeder Menge: $\emptyset \subseteq M$
+:::
+
+### Vereinigung, Durchschnitt und Differenz {#sec-mengenoperationen}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** Beim Schulfest treten die Theatergruppe $T$ und die Schulband $S$ auf:
+
+$$
+T = \{\text{Anna}, \text{Ben}, \text{Clara}, \text{David}\} \qquad
+S = \{\text{Clara}, \text{David}, \text{Emil}\}
+$$
+
+- **Wer tritt überhaupt auf?** Anna, Ben, Clara, David und Emil. Das sind alle, die
+  in *mindestens einer* der beiden Gruppen sind. Das ist die **Vereinigung**.
+- **Wer ist bei beiden Gruppen dabei** und muss sich zwischen den Auftritten schnell
+  umziehen? Clara und David. Das sind alle, die in *beiden* Gruppen sind. Das ist
+  der **Durchschnitt**.
+- **Wer spielt nur Theater** und nicht in der Band? Anna und Ben. Das sind alle aus
+  $T$, die *nicht* in $S$ sind. Das ist die **Differenz**.
+
+In den folgenden Beispielen verwenden wir immer die Mengen
+:::
+
+$$
+A = \{1, 2, 3, 4, 5\} \qquad B = \{4, 5, 6, 7\}
+$$
+
+#### Vereinigung {#sec-vereinigung}
+
+::: {.callout-note title="Definition: Vereinigung"}
+Die **Vereinigungsmenge** $A \cup B$ („$A$ vereinigt $B$“) enthält alle Elemente, die
+in $A$ **oder** in $B$ (oder in beiden) liegen.
+
+$$
+A \cup B = \{x \mid x \in A \text{ oder } x \in B\}
+$$
+:::
+
+![Vereinigung $A \cup B$](images/venn-vereinigung.svg){#fig-vereinigung width="45%"}
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+**Beispiel:**
+
+$$
+A \cup B = \{1, 2, 3, 4, 5, 6, 7\}
+$$
+
+#### Durchschnitt {#sec-durchschnitt}
+
+::: {.callout-note title="Definition: Durchschnitt"}
+Die **Durchschnittsmenge** $A \cap B$ („$A$ geschnitten $B$“) enthält alle Elemente,
+die in $A$ **und** in $B$ liegen.
+
+$$
+A \cap B = \{x \mid x \in A \text{ und } x \in B\}
+$$
+:::
+
+![Durchschnitt $A \cap B$](images/venn-durchschnitt.svg){#fig-durchschnitt width="45%"}
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+**Beispiel:**
+
+$$
+A \cap B = \{4, 5\}
+$$
+
+::: {.content-hidden when-format="revealjs"}
+Haben zwei Mengen kein gemeinsames Element, so ist ihr Durchschnitt die leere Menge.
+:::
+
+::: {.callout-important title="Merke"}
+Ist $A \cap B = \emptyset$, so heißen $A$ und $B$ **disjunkt** (elementfremd).
+:::
+
+#### Differenz {#sec-differenz}
+
+::: {.callout-note title="Definition: Differenz"}
+Die **Differenzmenge** $A \setminus B$ („$A$ ohne $B$“) enthält alle Elemente, die in
+$A$, aber **nicht** in $B$ liegen.
+
+$$
+A \setminus B = \{x \mid x \in A \text{ und } x \notin B\}
+$$
+:::
+
+![Differenz $A \setminus B$](images/venn-differenz.svg){#fig-differenz width="45%"}
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+**Beispiel:**
+
+$$
+A \setminus B = \{1, 2, 3\} \qquad B \setminus A = \{6, 7\}
+$$
+
+::: {.content-hidden when-format="revealjs"}
+Bei der Differenz kommt es auf die **Reihenfolge** an:
+$A \setminus B$ ist im Allgemeinen nicht dasselbe wie $B \setminus A$.
+:::

@@ -1,0 +1,38 @@
+# Quarto
+/.quarto/
+/_book/
+/_folien/
+/_freeze/
+*_files/
+*_cache/
+/.luarc.json
+site_libs/
+
+# Gerenderte Einzeldateien (z. B. Folien, Vorschau)
+*.html
+*.pdf
+!**/images/**/*.pdf
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# Python / Jupyter
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+
+# Syncthing
+.stfolder/
+.stversions/
+.syncthing.*.tmp
+~syncthing~*.tmp
+
+# Editor / System
+.DS_Store
+Thumbs.db
+*~
+*.swp
+
+**/*.quarto_ipynb

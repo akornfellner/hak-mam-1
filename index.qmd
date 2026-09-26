@@ -1,0 +1,10 @@
+# Vorwort {.unnumbered}
+
+Dieses Skript begleitet den Unterricht in *Mathematik und angewandte Mathematik*
+im ersten Jahrgang der HAK Eferding.
+
+Es gibt das Skript in drei Formen:
+
+- als **PDF** zum Ausdrucken,
+- als **Webseite** zum Nachlesen am Computer oder Handy,
+- als **Folien** für den Unterricht (nur mit den wichtigsten Formeln und Merksätzen).

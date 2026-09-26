@@ -1,0 +1,32 @@
+project:
+  type: book
+  output-dir: _book
+
+lang: de
+
+book:
+  title: "Mathematik und angewandte Mathematik"
+  subtitle: "HAK – 1. Klasse"
+  author: "Alexander Kornfellner"
+  chapters:
+    - index.qmd
+    - 01-zahlen-und-mengen/kapitel-1.qmd
+
+number-depth: 2
+
+filters:
+  - _filters/pdf-nummerierung.lua
+  - _filters/deutsche-anfuehrungszeichen.lua
+
+format:
+  html:
+    # Umschalter hell/dunkel; "brand" zuletzt, damit _brand.yml Vorrang hat
+    theme:
+      light: [cosmo, brand]
+      dark: [darkly, brand]
+    toc: true
+  typst:
+    papersize: a4
+    toc: true
+    toc-depth: 2
+    include-before-body: _includes/typst-anpassungen.typ

@@ -1,0 +1,17 @@
+# Profil für die Folien (revealjs)
+# Rendern mit: quarto render --profile folien
+#
+# Ein Quarto-Buch kann keine Folien erzeugen. Dieses Profil schaltet deshalb auf
+# ein normales Projekt um und rendert nur die Foliendateien (folien-N.qmd).
+
+project:
+  type: default
+  output-dir: _folien
+  render:
+    - "*/folien-*.qmd"
+  resources:
+    - /hak-logo.png
+
+format:
+  revealjs:
+    slide-level: 4
