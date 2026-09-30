@@ -1,12 +1,9 @@
 # CLAUDE.md – Mathematik-Skript HAK/HAS Eferding
 
-Gilt für alle Mathematik-Skripte (1.–5. Klasse HAK) und wird in jedes
-Skript-Repository kopiert. Welche Kapitel und Themen dazukommen, gibt der Benutzer
-jeweils vor.
+Mathematik-Skript für die 1. Klasse HAK. Welche Kapitel und Themen dazukommen, gibt
+der Benutzer jeweils vor.
 
-**Pflege:** Neue Regeln oder Vorgaben des Benutzers sofort hier eintragen. Gilt eine
-Regel für alle Skripten oder ändert sich die Infrastruktur (Filter, Typst, Workflow),
-auch die Vorlage `/home/alex/Dokumente/Skript/skript-vorlage` nachziehen.
+**Pflege:** Neue Regeln oder Vorgaben des Benutzers sofort hier eintragen.
 
 ## Allgemein
 

@@ -8,12 +8,13 @@ sync:
   uv sync
 
 # Live-Vorschau des Skripts (HTML) im Browser
+# (--render html: vorher alles neu rendern, sonst fehlen Änderungen in _N-M-*.qmd)
 preview:
-  uv run quarto preview
+  uv run quarto preview --render html
 
 # Live-Vorschau des Skripts als PDF
 preview-pdf:
-  uv run quarto preview --to typst
+  uv run quarto preview --to typst --render typst
 
 # Live-Vorschau der Folien eines Kapitels: just folien 1
 folien n:

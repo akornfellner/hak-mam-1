@@ -1,0 +1,685 @@
+## Rechnen mit Zahlen {#sec-rechnen-mit-zahlen}
+
+```{python}
+#| include: false
+from _python.grafiken import *
+```
+
+### Rechenarten und Rechengesetze {#sec-rechengesetze}
+
+#### Vorrangregeln {#sec-vorrangregeln}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** In der Schulbuffet-Pause kaufst du ein Getränk um $1{,}50$ €
+und drei Wurstsemmeln zu je $2$ €. Du rechnest ganz selbstverständlich
+
+$$
+1{,}50 + 3 \cdot 2 = 1{,}50 + 6 = 7{,}50 \text{ €}
+$$
+
+und nicht $(1{,}50 + 3) \cdot 2 = 9$ €. Die drei Semmeln gehören zusammen, also wird
+zuerst multipliziert. Damit alle eine Rechnung gleich verstehen, gibt es feste
+**Vorrangregeln**.
+:::
+
+::: {.callout-important title="Merke"}
+- **Potenz** vor **Punkt** vor **Strich**:
+   zuerst Potenzieren, dann Multiplizieren und Dividieren, zuletzt Addieren und
+   Subtrahieren.
+- Gleichrangige Rechnungen werden **von links nach rechts** gerechnet.
+- Was in **Klammern** steht, wird immer zuerst gerechnet.
+:::
+
+**Beispiel:**
+
+$$
+2 + 3 \cdot 4^2 = 2 + 3 \cdot 16 = 2 + 48 = 50
+$$
+
+$$
+20 - 12 : 3 \cdot 2 = 20 - 4 \cdot 2 = 20 - 8 = 12
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Mit **Klammern** kann man jede Reihenfolge erzwingen. Dieselben Zahlen und
+Rechenzeichen liefern dann ganz andere Ergebnisse:
+:::
+
+**Beispiel:**
+
+$$
+2 + 3 \cdot 4^2 = 50 \qquad (2 + 3) \cdot 4^2 = 5 \cdot 16 = 80 \qquad
+(2 + 3 \cdot 4)^2 = 14^2 = 196
+$$
+
+::: {.callout-tip title="Tipp: Taschenrechner"}
+Der Taschenrechner kennt die Vorrangregeln. Wenn du eine andere Reihenfolge willst,
+musst du die Klammern eintippen.
+:::
+
+#### Potenzen mit negativer Basis {#sec-potenzen-negativ}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** Lena tippt $-2^2$ in den Taschenrechner und bekommt $-4$.
+Ihr Sitznachbar tippt $(-2)^2$ und bekommt $4$. Hat sich einer der beiden vertippt?
+Nein, beide Ergebnisse stimmen. Es kommt nur darauf an, **was** potenziert wird.
+:::
+
+::: {.callout-note title="Definition: Potenz"}
+Eine **Potenz** ist eine Kurzschreibweise für ein Produkt aus lauter gleichen
+Faktoren:
+
+$$
+a^n = \underbrace{a \cdot a \cdot \ldots \cdot a}_{n \text{ Faktoren}}
+$$
+
+$a$ heißt **Basis** (Grundzahl), $n$ heißt **Exponent** (Hochzahl).
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Ist die Basis negativ, entscheidet die Anzahl der Faktoren über das Vorzeichen.
+Jeweils zwei Minus ergeben zusammen ein Plus:
+:::
+
+**Beispiel:**
+
+$$
+(-2)^1 = -2 \qquad (-2)^2 = (-2) \cdot (-2) = 4 \qquad
+(-2)^3 = (-2) \cdot (-2) \cdot (-2) = -8 \qquad (-2)^4 = 16
+$$
+
+::: {.callout-important title="Merke"}
+- Negative Basis, **gerader** Exponent: Das Ergebnis ist **positiv**.
+- Negative Basis, **ungerader** Exponent: Das Ergebnis ist **negativ**.
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Die Klammer ist dabei entscheidend. Ohne Klammer gehört der Exponent nur zur Zahl,
+nicht zum Minus. Wegen „Potenz vor Strich“ wird zuerst potenziert und erst dann das
+Minus davorgeschrieben:
+:::
+
+**Beispiel:**
+
+$$
+(-3)^2 = (-3) \cdot (-3) = 9 \qquad -3^2 = -(3 \cdot 3) = -9
+$$
+
+#### Hochzahl null {#sec-hochzahl-null}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** Ein Blatt Papier wird immer wieder in der Mitte gefaltet.
+Nach jedem Falten liegen doppelt so viele Lagen übereinander: $2^1 = 2$,
+$2^2 = 4$, $2^3 = 8$ usw. Und bevor man überhaupt faltet? Da liegt genau **eine**
+Lage, also $2^0 = 1$.
+
+Das sieht man auch, wenn man in der Reihe der Potenzen rückwärts geht: Wird der
+Exponent um $1$ kleiner, halbiert sich das Ergebnis.
+:::
+
+$$
+2^3 = 8 \qquad 2^2 = 4 \qquad 2^1 = 2 \qquad 2^0 = 1
+$$
+
+::: {.callout-important title="Merke"}
+Jede Zahl (außer $0$) hoch $0$ ergibt $1$:
+
+$$
+a^0 = 1 \quad \text{für } a \neq 0
+$$
+:::
+
+**Beispiel:**
+
+$$
+5^0 = 1 \qquad (-7)^0 = 1 \qquad 1\,000\,000^0 = 1 \qquad -7^0 = -1
+$$
+
+::: {.content-hidden when-format="revealjs"}
+Beim letzten Beispiel fehlt die Klammer: Nur die $7$ wird hoch $0$ genommen, das
+Minus bleibt stehen.
+:::
+
+#### Division durch null {#sec-division-durch-null}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** $12$ Kekse sollen gerecht auf $4$ Kinder aufgeteilt werden.
+Jedes bekommt $12 : 4 = 3$ Kekse. Die Probe zeigt: $3 \cdot 4 = 12$. Aber wie viele
+Kekse bekommt jedes Kind, wenn **kein** Kind da ist? Diese Frage ergibt keinen Sinn,
+und der Taschenrechner meldet bei $12 : 0$ einen Fehler („Math ERROR“).
+
+Warum das so ist, zeigt die Probe. Eine Division ist die Umkehrung einer
+Multiplikation:
+:::
+
+$$
+12 : 4 = 3, \quad \text{weil } 3 \cdot 4 = 12
+$$
+
+$$
+12 : 0 = \ ?, \quad \text{aber } ? \cdot 0 = 0 \neq 12
+$$
+
+::: {.content-hidden when-format="revealjs"}
+Es gibt keine Zahl, die mit $0$ multipliziert $12$ ergibt, denn jede Zahl mal $0$ ist
+$0$. Bei $0 : 0$ würde dagegen **jede** Zahl die Probe bestehen. Auch das ist kein
+eindeutiges Ergebnis.
+:::
+
+::: {.callout-important title="Merke"}
+Durch $0$ darf man **nicht** dividieren. $a : 0$ und $\frac{a}{0}$ sind nicht
+definiert.
+
+$0$ durch eine andere Zahl ist aber erlaubt: $0 : 5 = 0$, denn $0 \cdot 5 = 0$.
+:::
+
+#### Wurzeln aus negativen Zahlen {#sec-wurzel-negativ}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** Ein quadratisches Beet hat eine Fläche von $9$ m². Wie lang
+ist eine Seite? Gesucht ist die Zahl, die mit sich selbst multipliziert $9$ ergibt:
+$3 \cdot 3 = 9$, die Seite ist also $\sqrt{9} = 3$ m lang. Und welches Beet hätte eine
+Fläche von $-9$ m²? So ein Beet gibt es nicht.
+:::
+
+::: {.callout-note title="Definition: Quadratwurzel"}
+Die **Quadratwurzel** $\sqrt{a}$ ist jene Zahl, die **nicht negativ** ist und mit sich
+selbst multipliziert $a$ ergibt.
+
+$$
+\sqrt{a} = b, \quad \text{weil } b^2 = a \quad (b \geq 0)
+$$
+:::
+
+**Beispiel:**
+
+$$
+\sqrt{9} = 3 \qquad \sqrt{0{,}25} = 0{,}5 \qquad \sqrt{0} = 0
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Kann man auch $\sqrt{-9}$ berechnen? Man bräuchte eine Zahl, die mit sich selbst
+multipliziert $-9$ ergibt. Probieren wir es:
+:::
+
+$$
+3 \cdot 3 = 9 \qquad (-3) \cdot (-3) = 9 \qquad 0 \cdot 0 = 0
+$$
+
+::: {.content-hidden when-format="revealjs"}
+Eine positive Zahl mal sich selbst ist positiv. Eine negative Zahl mal sich selbst
+ist ebenfalls positiv, denn Minus mal Minus ergibt Plus. Und $0$ mal $0$ ist $0$. Ein
+Quadrat ist also **nie negativ**, und deshalb gibt es keine reelle Zahl, deren
+Quadrat $-9$ ist.
+:::
+
+::: {.callout-important title="Merke"}
+Jede Zahl zum Quadrat ist größer oder gleich $0$: $a^2 \geq 0$.
+
+Die Wurzel aus einer **negativen Zahl** ist in $\mathbb{R}$ **nicht definiert**, zum
+Beispiel $\sqrt{-9}$.
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.callout-tip title="Tipp: Dritte Wurzel"}
+Bei der dritten Wurzel ist eine negative Zahl kein Problem, denn ein ungerader
+Exponent erhält das Minus: $\sqrt[3]{-8} = -2$, weil $(-2)^3 = -8$.
+:::
+
+#### Rechengesetze {#sec-rechengesetze-kad}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** Du kaufst Hefte um $17$ €, einen Taschenrechner um $38$ €
+und Stifte um $3$ €. Im Kopf rechnest du am schnellsten $17 + 3 = 20$ und dann
+$20 + 38 = 58$ €. Du hast die Zahlen vertauscht und anders zusammengefasst, und das
+Ergebnis stimmt trotzdem. Welche solchen Tricks erlaubt sind, sagen die
+**Rechengesetze**.
+:::
+
+::: {.callout-note title="Definition: Kommutativgesetz (Vertauschungsgesetz)"}
+Bei der Addition und der Multiplikation darf man die Zahlen **vertauschen**.
+
+$$
+a + b = b + a \qquad a \cdot b = b \cdot a
+$$
+:::
+
+**Beispiel:**
+
+$$
+17 + 38 + 3 = 17 + 3 + 38 = 58 \qquad 25 \cdot 7 \cdot 4 = 25 \cdot 4 \cdot 7 = 700
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.callout-note title="Definition: Assoziativgesetz (Verbindungsgesetz)"}
+Bei der Addition und der Multiplikation darf man **beliebig zusammenfassen**, also
+Klammern setzen oder weglassen.
+
+$$
+(a + b) + c = a + (b + c) \qquad (a \cdot b) \cdot c = a \cdot (b \cdot c)
+$$
+:::
+
+**Beispiel:**
+
+$$
+(38 + 17) + 3 = 38 + (17 + 3) = 38 + 20 = 58 \qquad
+(7 \cdot 25) \cdot 4 = 7 \cdot (25 \cdot 4) = 700
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.callout-important title="Merke"}
+Bei der **Subtraktion** und der **Division** gelten diese beiden Gesetze **nicht**:
+
+$$
+5 - 3 \neq 3 - 5 \qquad (12 : 6) : 2 = 1 \neq 12 : (6 : 2) = 4
+$$
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Drei Freunde kaufen sich jeweils eine Wurstsemmel um $2$ € und ein Getränk um
+$1{,}50$ €. Man kann den Preis für eine Person mal drei nehmen oder Semmeln und
+Getränke getrennt zusammenzählen. Beides ergibt dasselbe:
+$3 \cdot (2 + 1{,}50) = 3 \cdot 2 + 3 \cdot 1{,}50 = 10{,}50$ €.
+:::
+
+::: {.callout-note title="Definition: Distributivgesetz (Verteilungsgesetz)"}
+Eine Zahl vor einer Klammer wird mit **jedem** Glied in der Klammer multipliziert.
+
+$$
+a \cdot (b + c) = a \cdot b + a \cdot c \qquad a \cdot (b - c) = a \cdot b - a \cdot c
+$$
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Liest man das Gesetz von rechts nach links, nennt man es **Herausheben**: Ein
+gemeinsamer Faktor wird vor die Klammer gezogen. Beides hilft oft beim Kopfrechnen:
+:::
+
+**Beispiel:**
+
+$$
+7 \cdot 98 = 7 \cdot (100 - 2) = 700 - 14 = 686 \qquad
+13 \cdot 6 + 13 \cdot 4 = 13 \cdot (6 + 4) = 130
+$$
+
+### Bruchrechnung {#sec-bruchrechnung}
+
+::: {.callout-important title="Merke"}
+Die Schreibweise $2\frac{1}{3}$ („zwei ganze ein Drittel“) wird in der Oberstufe
+**nicht mehr verwendet**. Gemeint ist $2 + \frac{1}{3}$, der Taschenrechner rechnet
+aber $2 \cdot \frac{1}{3}$. Stattdessen schreibt man den Bruch mit einem einzigen
+Bruchstrich:
+
+$$
+2 + \frac{1}{3} = \frac{6}{3} + \frac{1}{3} = \frac{7}{3}
+$$
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Ein Bruch $\frac{a}{b}$ beschreibt einen Anteil: Das Ganze wird in $b$ gleiche Teile
+geteilt (**Nenner**), und davon nimmt man $a$ Teile (**Zähler**). Der Bruchstrich
+bedeutet „dividiert durch“, deshalb darf der Nenner nie $0$ sein.
+:::
+
+$$
+\frac{a}{b} = a : b \qquad a \ldots \text{Zähler} \qquad b \ldots \text{Nenner}
+\ (b \neq 0)
+$$
+
+#### Kürzen und Erweitern {#sec-kuerzen-erweitern}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** Eine Pizza wird in $4$ Stücke geschnitten, und du isst $2$
+davon, also $\frac{2}{4}$ der Pizza. Deine Freundin schneidet ihre gleich große Pizza
+in $8$ Stücke und isst $4$ davon, also $\frac{4}{8}$. Ihr habt beide genau **die
+Hälfte** gegessen:
+
+$$
+\frac{2}{4} = \frac{4}{8} = \frac{1}{2}
+$$
+
+Ein Bruch kann also verschieden aussehen und trotzdem denselben Wert haben.
+:::
+
+::: {.callout-note title="Definition: Erweitern und Kürzen"}
+**Erweitern:** Zähler und Nenner werden mit derselben Zahl $c$ **multipliziert**.
+
+$$
+\frac{a}{b} = \frac{a \cdot c}{b \cdot c}
+$$
+
+**Kürzen:** Zähler und Nenner werden durch dieselbe Zahl $c$ **dividiert**.
+
+$$
+\frac{a}{b} = \frac{a : c}{b : c}
+$$
+
+Dabei muss $c \neq 0$ sein. Der Wert des Bruchs ändert sich nicht.
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+**Beispiel:**
+
+$$
+\frac{3}{4} = \frac{3 \cdot 5}{4 \cdot 5} = \frac{15}{20} \qquad
+\frac{18}{24} = \frac{18 : 6}{24 : 6} = \frac{3}{4}
+$$
+
+::: {.callout-important title="Merke"}
+Ein Bruch ist **vollständig gekürzt**, wenn Zähler und Nenner keinen gemeinsamen
+Teiler außer $1$ mehr haben. Man kürzt am schnellsten durch den **größten gemeinsamen
+Teiler** (ggT) von Zähler und Nenner.
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.callout-tip title="Tipp: Nur Faktoren kürzen"}
+Kürzen darf man nur Faktoren, nie einzelne Summanden:
+$\frac{2 + 3}{2} = \frac{5}{2}$, aber **nicht** $3$.
+:::
+
+#### Primfaktorzerlegung {#sec-primfaktorzerlegung}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** Beim Kürzen von $\frac{1\,092}{1\,872}$ sieht man nicht sofort,
+durch welche Zahl man kürzen kann. Hier hilft es, die Zahlen in ihre kleinsten
+„Bausteine“ zu zerlegen, so wie man ein Lego-Modell in einzelne Steine zerlegt.
+Diese Bausteine sind die **Primzahlen** (siehe Abschnitt „Primzahlen“).
+:::
+
+::: {.callout-note title="Definition: Primfaktorzerlegung"}
+Jede natürliche Zahl größer als $1$ lässt sich als Produkt von Primzahlen schreiben.
+Diese Darstellung heißt **Primfaktorzerlegung**.
+:::
+
+::: {.content-hidden when-format="revealjs"}
+**So geht's:** Man dividiert die Zahl durch die kleinste Primzahl, die sie teilt,
+und schreibt diese rechts neben den Strich. Mit dem Ergebnis macht man in der
+nächsten Zeile weiter, bis $1$ übrig bleibt. Die Zahlen rechts vom Strich sind die
+Primfaktoren.
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+```{python}
+#| label: fig-primfaktorzerlegung
+#| fig-cap: "Primfaktorzerlegung von $1\\,092$ und $1\\,872$"
+primfaktor_treppe(1092, 1872);
+```
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+**Beispiel:**
+
+$$
+1\,092 = 2 \cdot 2 \cdot 3 \cdot 7 \cdot 13 = 2^2 \cdot 3 \cdot 7 \cdot 13
+$$
+
+$$
+1\,872 = 2 \cdot 2 \cdot 2 \cdot 2 \cdot 3 \cdot 3 \cdot 13 = 2^4 \cdot 3^2 \cdot 13
+$$
+
+::: {.callout-tip title="Tipp: Teilbarkeitsregeln"}
+- durch $2$: Die letzte Ziffer ist gerade.
+- durch $3$: Die Ziffernsumme ist durch $3$ teilbar.
+- durch $5$: Die letzte Ziffer ist $0$ oder $5$.
+:::
+
+#### ggT und kgV {#sec-ggt-kgv}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:**
+
+- Für ein Klassenfest werden $12$ Äpfel und $18$ Birnen auf Obstteller verteilt.
+  Auf jedem Teller soll gleich viel liegen, und es soll nichts übrig bleiben. Wie
+  viele Teller kann man **höchstens** füllen? $12$ und $18$ sind beide durch $6$
+  teilbar, aber durch keine größere Zahl. Man kann also $6$ Teller mit je $2$ Äpfeln
+  und $3$ Birnen füllen. $6$ ist der **größte gemeinsame Teiler** von $12$ und $18$.
+- Vor der Schule fährt der Bus nach Linz alle $12$ Minuten ab, der Bus nach Wels alle
+  $18$ Minuten. Um 7:00 Uhr fahren beide gleichzeitig. Wann ist das **frühestens**
+  wieder so? Die Vielfachen von $12$ sind $12, 24, 36, \ldots$, die Vielfachen von
+  $18$ sind $18, 36, \ldots$ Nach $36$ Minuten, also um 7:36 Uhr. $36$ ist das
+  **kleinste gemeinsame Vielfache** von $12$ und $18$.
+:::
+
+::: {.callout-note title="Definition: ggT und kgV"}
+Der **größte gemeinsame Teiler** $\text{ggT}(a, b)$ ist die größte Zahl, durch die
+sowohl $a$ als auch $b$ teilbar ist.
+
+Das **kleinste gemeinsame Vielfache** $\text{kgV}(a, b)$ ist die kleinste Zahl
+(außer $0$), die sowohl durch $a$ als auch durch $b$ teilbar ist.
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Bei großen Zahlen findet man ggT und kgV am einfachsten mit der Primfaktorzerlegung.
+Man schreibt die Primfaktoren beider Zahlen so untereinander, dass gleiche Faktoren
+übereinanderstehen:
+:::
+
+**Beispiel:** ggT und kgV von $1\,092$ und $1\,872$ (Zerlegung siehe
+@fig-primfaktorzerlegung)
+
+| | $2$ | $3$ | $7$ | $13$ | |
+|---|---|---|---|---|---|
+| $1\,092$ | $2 \cdot 2$ | $3$ | $7$ | $13$ | |
+| $1\,872$ | $2 \cdot 2 \cdot 2 \cdot 2$ | $3 \cdot 3$ | | $13$ | |
+| **ggT** | $2 \cdot 2$ | $3$ | | $13$ | $= 156$ |
+| **kgV** | $2 \cdot 2 \cdot 2 \cdot 2$ | $3 \cdot 3$ | $7$ | $13$ | $= 13\,104$ |
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.callout-important title="Merke"}
+- **ggT:** nur die Primfaktoren, die in **beiden** Zahlen vorkommen, jeweils so oft,
+  wie sie **in beiden** vorkommen (kleinster Exponent).
+- **kgV:** **alle** Primfaktoren, die vorkommen, jeweils so oft, wie sie
+  **höchstens** vorkommen (größter Exponent).
+:::
+
+**Beispiel:** In Potenzschreibweise:
+
+$$
+\text{ggT} = 2^2 \cdot 3 \cdot 13 = 156 \qquad
+\text{kgV} = 2^4 \cdot 3^2 \cdot 7 \cdot 13 = 13\,104
+$$
+
+::: {.content-hidden when-format="revealjs"}
+Mit dem ggT lässt sich der Bruch aus dem Einführungsbeispiel in einem Schritt
+vollständig kürzen:
+:::
+
+$$
+\frac{1\,092}{1\,872} = \frac{1\,092 : 156}{1\,872 : 156} = \frac{7}{12}
+$$
+
+#### Addition und Subtraktion {#sec-brueche-addieren}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** Von einer Pizza isst du $\frac{1}{4}$, dein Bruder isst
+$\frac{2}{4}$. Zusammen habt ihr $\frac{3}{4}$ gegessen. Die Viertel zählt man einfach
+zusammen, wie Äpfel.
+
+Was aber, wenn du $\frac{1}{2}$ und dein Bruder $\frac{1}{3}$ isst? Halbe und Drittel
+kann man nicht direkt zusammenzählen. Man muss die Pizza zuerst so aufteilen, dass
+beide Anteile aus **gleich großen Stücken** bestehen: Sechstel.
+$\frac{1}{2} = \frac{3}{6}$ und $\frac{1}{3} = \frac{2}{6}$, zusammen also
+$\frac{5}{6}$.
+:::
+
+::: {.callout-note title="Definition: Addition und Subtraktion von Brüchen"}
+**Gleichnamige Brüche** (gleicher Nenner): Die Zähler werden addiert bzw. subtrahiert,
+der Nenner bleibt gleich.
+
+$$
+\frac{a}{c} + \frac{b}{c} = \frac{a + b}{c} \qquad
+\frac{a}{c} - \frac{b}{c} = \frac{a - b}{c}
+$$
+
+**Ungleichnamige Brüche** (verschiedene Nenner) werden zuerst durch Erweitern
+gleichnamig gemacht.
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Als gemeinsamen Nenner nimmt man am besten das **kgV** der Nenner. Das ist der
+kleinste gemeinsame Nenner, dadurch bleiben die Zahlen klein.
+:::
+
+**Beispiel:** $\text{kgV}(12, 18) = 36$
+
+$$
+\frac{5}{12} + \frac{7}{18} = \frac{5 \cdot 3}{12 \cdot 3} + \frac{7 \cdot 2}{18 \cdot 2}
+= \frac{15}{36} + \frac{14}{36} = \frac{29}{36}
+$$
+
+**Beispiel:** $\text{kgV}(4, 6) = 12$
+
+$$
+\frac{3}{4} - \frac{5}{6} = \frac{9}{12} - \frac{10}{12} = -\frac{1}{12}
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Eine ganze Zahl schreibt man dazu als Bruch mit dem passenden Nenner:
+:::
+
+**Beispiel:**
+
+$$
+2 - \frac{3}{5} = \frac{10}{5} - \frac{3}{5} = \frac{7}{5}
+$$
+
+::: {.callout-important title="Merke"}
+Beim Addieren und Subtrahieren werden **nie** die Nenner addiert oder subtrahiert:
+
+$$
+\frac{1}{2} + \frac{1}{3} \neq \frac{2}{5}
+$$
+:::
+
+#### Multiplikation und Division {#sec-brueche-multiplizieren}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** Vom Geburtstagsfest ist noch eine halbe Torte übrig. Davon
+isst du am nächsten Tag $\frac{2}{3}$. Welcher Anteil der ganzen Torte ist das?
+„$\frac{2}{3}$ **von** $\frac{1}{2}$“ bedeutet $\frac{2}{3} \cdot \frac{1}{2}$:
+Die halbe Torte wird in $3$ Teile geteilt, das sind Sechstel, und du isst $2$ davon.
+Das ist $\frac{2}{6} = \frac{1}{3}$ der Torte.
+:::
+
+::: {.callout-note title="Definition: Multiplikation von Brüchen"}
+Zähler mal Zähler, Nenner mal Nenner.
+
+$$
+\frac{a}{b} \cdot \frac{c}{d} = \frac{a \cdot c}{b \cdot d}
+$$
+:::
+
+**Beispiel:**
+
+$$
+\frac{2}{3} \cdot \frac{1}{2} = \frac{2}{6} = \frac{1}{3} \qquad
+3 \cdot \frac{2}{7} = \frac{3}{1} \cdot \frac{2}{7} = \frac{6}{7}
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.callout-tip title="Tipp: Vor dem Multiplizieren kürzen"}
+Man darf jeden Zähler mit jedem Nenner kürzen, bevor man multipliziert. So bleiben
+die Zahlen klein:
+
+$$
+\frac{4}{9} \cdot \frac{3}{8} = \frac{4 \cdot 3}{9 \cdot 8}
+= \frac{1 \cdot 1}{3 \cdot 2} = \frac{1}{6}
+$$
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** In einer Flasche sind $\frac{3}{4}$ Liter Saft. Wie viele
+Gläser mit je $\frac{1}{8}$ Liter kann man damit füllen? Gefragt ist, wie oft
+$\frac{1}{8}$ in $\frac{3}{4}$ hineinpasst, also $\frac{3}{4} : \frac{1}{8}$. Ein
+Viertelliter sind zwei Achtelliter, drei Viertelliter also sechs Achtelliter. Man
+kann $6$ Gläser füllen, und genau das liefert auch die Rechnung
+$\frac{3}{4} \cdot \frac{8}{1} = \frac{24}{4} = 6$.
+:::
+
+::: {.callout-note title="Definition: Division von Brüchen"}
+Man dividiert durch einen Bruch, indem man mit seinem **Kehrwert** multipliziert.
+Den Kehrwert erhält man, indem man Zähler und Nenner vertauscht.
+
+$$
+\frac{a}{b} : \frac{c}{d} = \frac{a}{b} \cdot \frac{d}{c}
+$$
+:::
+
+**Beispiel:**
+
+$$
+\frac{3}{4} : \frac{1}{8} = \frac{3}{4} \cdot \frac{8}{1} = \frac{24}{4} = 6 \qquad
+\frac{3}{4} : \frac{9}{8} = \frac{3}{4} \cdot \frac{8}{9} = \frac{24}{36} = \frac{2}{3}
+$$
+
+::: {.callout-important title="Merke"}
+Nur beim Dividieren wird der Kehrwert gebildet, und zwar nur vom **zweiten** Bruch
+(dem, durch den man dividiert).
+:::

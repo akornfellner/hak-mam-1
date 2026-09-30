@@ -81,3 +81,54 @@ def zahlengerade(von, bis, intervalle=(), punkte=(), schritt=1,
         ax.plot(x, 0, "o", ms=9, color=ROT, zorder=4)
 
     return fig
+
+
+def tausender(n):
+    """Ganze Zahl mit Leerzeichen als Tausendertrennzeichen: 1092 → „1 092“."""
+    return f"{n:,}".replace(",", " ").replace("-", "−")
+
+
+def primfaktoren(n):
+    """Liste der Primfaktoren von n, der Größe nach: 1092 → [2, 2, 3, 7, 13]."""
+    faktoren, teiler = [], 2
+    while n > 1:
+        while n % teiler == 0:
+            faktoren.append(teiler)
+            n //= teiler
+        teiler += 1
+    return faktoren
+
+
+def primfaktor_treppe(*zahlen, zeile=0.32):
+    """Primfaktorzerlegung als „Treppe“: links die Zahl, rechts der Teiler.
+
+    Mehrere Zahlen stehen nebeneinander. Die Ausgangszahl ist rot.
+    """
+    spalten = []
+    for n in zahlen:
+        faktoren = primfaktoren(n)
+        reste = [n]
+        for p in faktoren:
+            reste.append(reste[-1] // p)
+        spalten.append((reste, faktoren))
+
+    zeilen = max(len(reste) for reste, _ in spalten)
+    fig, ax = plt.subplots(figsize=(1.8 * len(zahlen), zeile * zeilen + 0.1))
+    ax.set_xlim(0, 1.8 * len(zahlen))
+    ax.set_ylim(-zeile * (zeilen - 0.5), zeile * 0.6)
+    ax.axis("off")
+
+    for i, (reste, faktoren) in enumerate(spalten):
+        strich = 1.8 * i + 0.95
+        for k, rest in enumerate(reste):
+            ax.text(strich - 0.1, -k * zeile, tausender(rest), ha="right",
+                    va="center",
+                    color=ROT if k == 0 else SCHWARZ,
+                    fontweight="bold" if k == 0 else "normal")
+        for k, p in enumerate(faktoren):
+            ax.text(strich + 0.1, -k * zeile, str(p), ha="left",
+                    va="center")
+        ax.plot([strich, strich], [zeile * 0.5, -zeile * (len(reste) - 0.5)],
+                color=SCHWARZ, lw=1.5)
+
+    return fig

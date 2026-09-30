@@ -66,7 +66,7 @@ Ohne just:
 uv sync
 quarto render                    # Skript als HTML und PDF → _book/
 quarto render --profile folien   # Folien → _folien/
-quarto preview                   # Skript mit Live-Vorschau
+quarto preview --render html     # Skript mit Live-Vorschau
 
 # Folien mit Live-Vorschau (immer eine einzelne Foliendatei angeben)
 quarto preview 01-zahlen-und-mengen/folien-1.qmd --profile folien

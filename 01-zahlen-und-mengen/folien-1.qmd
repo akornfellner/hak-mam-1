@@ -5,3 +5,5 @@ format: revealjs
 ---
 
 {{< include _1-1-zahlenmengen.qmd >}}
+
+{{< include _1-2-rechnen-mit-zahlen.qmd >}}
