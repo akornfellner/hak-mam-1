@@ -472,6 +472,8 @@ $$
 Jede Zahlenmenge ist in der nächstgrößeren enthalten.
 :::
 
+{{< buch 1.10 1.11 >}}
+
 #### Teilmengen der reellen Zahlen beschreiben {#sec-mengen-in-r}
 
 ::: {.content-hidden when-format="revealjs"}
@@ -617,7 +619,7 @@ $$
 ```{python}
 #| label: fig-intervall-ab-minus-unendlich
 #| fig-cap: "$]-\\infty; 5[$"
-zahlengerade(0, 7, intervalle=[(None, 5, False, False)]);
+zahlengerade(0, 7, intervalle=[(None, 5, False, False)])
 ```
 
 ::: {.content-visible when-format="revealjs"}
@@ -635,3 +637,5 @@ zahlengerade(0, 7, intervalle=[(None, 5, False, False)]);
 Die Klammer „umarmt“ die Zahl, wenn sie dazugehört: $[2$. Dreht sie der Zahl den
 Rücken zu, gehört die Zahl nicht dazu: $]2$.
 :::
+
+{{< buch 1.13-1.22 >}}

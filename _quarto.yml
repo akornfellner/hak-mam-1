@@ -22,6 +22,10 @@ execute:
   echo: false
   warning: false
 
+# Kurzbefehle, z. B. {{< buch 1.23 1.24ab >}} für Buchbeispiele
+shortcodes:
+  - _shortcodes/buch.lua
+
 filters:
   - _filters/pdf-nummerierung.lua
   - _filters/deutsche-anfuehrungszeichen.lua
@@ -34,6 +38,7 @@ format:
     theme:
       light: [cosmo, brand]
       dark: [darkly, brand]
+    css: _includes/buchbeispiele.css
     toc: true
   typst:
     papersize: a4

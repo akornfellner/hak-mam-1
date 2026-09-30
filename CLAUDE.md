@@ -73,6 +73,7 @@ der Benutzer jeweils vor.
 ```
 _quarto.yml, _quarto-folien.yml, _brand.yml
 _filters/, _includes/    Korrekturen für PDF und Mathe (siehe unten)
+_shortcodes/buch.lua     Kurzbefehl {{< buch … >}} für Übungsbeispiele aus dem Buch
 _python/grafiken.py      gemeinsame matplotlib-Funktionen
 index.qmd                Startseite / Vorwort
 NN-kapitelname/          ein Ordner pro Kapitel (01-, 02-, …)
@@ -111,6 +112,15 @@ NN-kapitelname/          ein Ordner pro Kapitel (01-, 02-, …)
 - Merksätze: `callout-important title="Merke"`, Tipps: `callout-tip title="Tipp: …"`.
 - Nichts nummerieren außer Abbildungen: keine `#def-`/`#exm-`-Blöcke.
 - Schreibweisen als Tabelle mit den Spalten „Schreibweise“ | „Sprechweise“.
+- **Übungsbeispiele aus dem Schulbuch** mit dem Kurzbefehl `{{< buch 1.23 1.24ab 1.27 >}}`
+  (eigene Zeile, Nummern mit Leerzeichen getrennt, keine Seitenzahlen). Ergibt einen
+  Kasten „Übungsbeispiele: 1.23, 1.24ab, 1.27“ im Skript und auf den Folien.
+  - Nummern gibt nur der Benutzer vor, nie selbst erfinden. Nennt er sie beim
+    Einarbeiten eines Kapitels, den Kasten an die angegebene Stelle setzen (meist
+    am Ende des passenden `###`- oder `####`-Abschnitts).
+  - Aussehen: HTML/Folien in `_includes/buchbeispiele.css` (Farben per
+    `var(--bs-primary)` bzw. `var(--brand-hak-rot)` aus `_brand.yml`), PDF in
+    `buchbeispiele()` in `_includes/typst-anpassungen.typ`.
 
 ## Mathematik & Technik
 

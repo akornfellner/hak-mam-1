@@ -9,3 +9,15 @@
 
 // Formeln nicht nummerieren
 #set math.equation(numbering: none)
+
+// Kasten für Buchbeispiele ({{< buch … >}}, siehe _shortcodes/buch.lua)
+#let buchbeispiele(nummern) = {
+  let farbe = brand-color.primary
+  block(
+    width: 100%,
+    inset: (x: 0.9em, y: 0.6em),
+    radius: 3pt,
+    fill: farbe.lighten(90%),
+    stroke: (left: 3pt + farbe),
+  )[#text(fill: farbe)[#fa-book-open() *Übungsbeispiele:*] #nummern]
+}
