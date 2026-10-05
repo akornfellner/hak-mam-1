@@ -10,6 +10,13 @@ book:
   title: "Mathematik und angewandte Mathematik"
   subtitle: "HAK – 1. Klasse"
   author: "Alexander Kornfellner"
+  # Link zur Übersichtsseite der Folien (nur online vorhanden: der Workflow
+  # kopiert die Folien nach _book/folien/, lokal siehe "just online")
+  navbar:
+    right:
+      - text: "Folien"
+        icon: easel
+        href: folien/index.html
   chapters:
     - index.qmd
     - 01-zahlen-und-mengen/kapitel-1.qmd

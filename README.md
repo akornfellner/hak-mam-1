@@ -28,8 +28,9 @@ _quarto.yml         Projekt-Konfiguration (Skript: HTML + PDF)
 _quarto-folien.yml  Profil für die Folien
 _brand.yml          Design: Schulfarben, Schriften, Logo
 _filters/           Lua-Filter (Nummerierung, Anführungszeichen)
-_includes/          Typst-Anpassungen für das PDF
+_includes/          Typst-Anpassungen für das PDF, CSS
 index.qmd           Startseite
+folien-uebersicht.qmd  Übersichtsseite der Folien (alle Kapitel)
 01-…/ – 04-…/       ein Ordner pro Kapitel, darin eine Datei pro Unterkapitel
 justfile            Kurzbefehle (just render, just folien 1, …)
 CLAUDE.md           Regeln und Konventionen für dieses Skript
@@ -57,7 +58,8 @@ just render          # Skript als HTML und PDF → _book/
 just pdf             # nur das PDF
 just render-folien   # alle Folien → _folien/
 just alles           # Skript und Folien
-just aufraeumen      # _book/, _folien/ und .quarto/ löschen
+just online          # Online-Version lokal testen: http://localhost:8000/hak-mam-1/
+just aufraeumen      # _book/, _folien/, _online/ und .quarto/ löschen
 ```
 
 Ohne just:
@@ -72,14 +74,18 @@ quarto preview --render html     # Skript mit Live-Vorschau
 quarto preview 01-zahlen-und-mengen/folien-1.qmd --profile folien
 ```
 
-Die Folien am besten über den Preview öffnen. Beim direkten Öffnen der HTML-Datei
-fehlt sonst das Logo.
-
 ## Online-Version
 
-Bei jedem Push auf `main` rendert GitHub Actions das Skript als HTML und
-veröffentlicht es auf GitHub Pages:
-<https://akornfellner.github.io/hak-mam-1/>
+Bei jedem Push auf `main` rendert GitHub Actions das Skript als HTML und die
+Folien und veröffentlicht beides auf GitHub Pages:
+
+- Skript: <https://akornfellner.github.io/hak-mam-1/>
+- Folien: <https://akornfellner.github.io/hak-mam-1/folien/> (Übersicht aller
+  Kapitel, ein Klick öffnet die Folien; im Skript oben rechts unter „Folien“)
+
+Für die Folien im Unterricht reicht damit ein Browser. Neue Kapitel erscheinen
+auf der Übersichtsseite von selbst. Vor dem Push lässt sich die Online-Version
+mit `just online` lokal prüfen.
 
 Einmalig nötig: *Settings → Pages → Build and deployment → Source: „GitHub Actions“*.
 

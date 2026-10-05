@@ -35,6 +35,19 @@ render-folien:
 # Skript und Folien rendern
 alles: render render-folien
 
-# Erzeugte Dateien löschen (_book/, _folien/, .quarto/)
+# Skript (HTML) und Folien so zusammenbauen wie auf GitHub Pages → _online/hak-mam-1/
+online-bauen:
+  uv run quarto render --to html
+  uv run quarto render --profile folien
+  rm -rf _online
+  mkdir -p _online/hak-mam-1/folien
+  cp -r _book/. _online/hak-mam-1/
+  cp -r _folien/. _online/hak-mam-1/folien/
+
+# Online-Version lokal testen: http://localhost:8000/hak-mam-1/
+online: online-bauen
+  uv run python -m http.server 8000 --directory _online
+
+# Erzeugte Dateien löschen (_book/, _folien/, _online/, .quarto/)
 aufraeumen:
-  rm -rf _book _folien .quarto
+  rm -rf _book _folien _online .quarto

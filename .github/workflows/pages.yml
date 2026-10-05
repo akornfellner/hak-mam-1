@@ -1,10 +1,12 @@
-# Rendert das Skript als HTML und veröffentlicht es auf GitHub Pages.
-# PDF und Folien werden hier bewusst nicht erzeugt.
+# Rendert das Skript als HTML und die Folien (revealjs) und veröffentlicht beides
+# auf GitHub Pages: Skript unter /, Folien unter /folien/ (Übersichtsseite).
+# Das PDF wird hier bewusst nicht erzeugt.
+# Lokal nachstellen: just online
 #
 # Einmalig im Repository einstellen:
 #   Settings → Pages → Build and deployment → Source: "GitHub Actions"
 
-name: Skript auf GitHub Pages veröffentlichen
+name: Skript und Folien auf GitHub Pages veröffentlichen
 
 on:
   push:
@@ -46,10 +48,19 @@ jobs:
       - name: Skript als HTML rendern
         run: quarto render --to html
 
+      - name: Folien rendern
+        run: quarto render --profile folien
+
+      # erst nach dem Rendern des Skripts, sonst räumt Quarto _book/ wieder leer
+      - name: Folien nach _book/folien/ kopieren
+        run: |
+          mkdir -p _book/folien
+          cp -r _folien/. _book/folien/
+
       - name: GitHub Pages vorbereiten
         uses: actions/configure-pages@v6
 
-      - name: HTML hochladen
+      - name: Skript und Folien hochladen
         uses: actions/upload-pages-artifact@v5
         with:
           path: _book

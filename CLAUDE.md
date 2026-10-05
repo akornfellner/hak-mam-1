@@ -29,12 +29,18 @@ der Benutzer jeweils vor.
   ergänzen und in README.md nachtragen.
 - Skript: `quarto render` → `_book/`. Folien: `quarto render --profile folien` → `_folien/`.
 - Ein Quarto-Buch kann keine revealjs-Folien erzeugen. Deshalb gibt es das Profil
-  `_quarto-folien.yml` (normales Projekt, nur `folien-*.qmd`). Folien-Einstellungen
-  gehören dorthin, nicht in die Foliendateien.
+  `_quarto-folien.yml` (Projekttyp `website`, nur `folien-*.qmd` und die
+  Übersichtsseite). Folien-Einstellungen gehören dorthin, nicht in die Foliendateien.
+- Übersichtsseite der Folien: `folien-uebersicht.qmd` → `_folien/index.html`
+  (normales HTML, Aussehen in `_includes/folien-uebersicht.css`). Sie findet alle
+  `NN-…/folien-N.qmd` selbst und zeigt Kapitelnummer und `title` aus deren
+  YAML-Kopf. Bei neuen Kapiteln ist nichts zu ergänzen.
 - Folien-Preview nur mit einer einzelnen Datei:
   `quarto preview 01-zahlen-und-mengen/folien-1.qmd --profile folien`.
-- Das Folien-Logo (`/hak-logo.png`, absoluter Pfad) erscheint nur über einen
-  Webserver, nicht beim Öffnen der HTML-Datei per Doppelklick.
+- Folien-Logo: kommt aus `_brand.yml` und wird mit relativem Pfad
+  (`../hak-logo.png`) eingebunden. Das klappt nur mit Projekttyp `website`; bei
+  `default` schreibt Quarto `/hak-logo.png`, und das Logo fehlt unter
+  `/hak-mam-1/folien/`. Den Projekttyp im Folien-Profil deshalb nicht ändern.
 - Python: Projekt-venv `.venv/`, verwaltet mit **uv** (`pyproject.toml`, `uv.lock`,
   `.python-version` immer mitcommitten). `_environment` setzt
   `QUARTO_PYTHON=.venv/bin/python`, sonst nimmt Quarto einen fremden Kernel.
@@ -46,9 +52,18 @@ der Benutzer jeweils vor.
 
 ### Veröffentlichung
 
-- `.github/workflows/pages.yml`: bei jedem Push auf `main` nur HTML rendern
-  (`uv sync --locked --no-dev`, `quarto render --to html`) und `_book/` per
-  Actions-Artefakt auf GitHub Pages veröffentlichen.
+- `.github/workflows/pages.yml`: bei jedem Push auf `main` Skript als HTML und
+  Folien rendern (`uv sync --locked --no-dev`, `quarto render --to html`,
+  `quarto render --profile folien`), `_folien/` nach `_book/folien/` kopieren und
+  `_book/` per Actions-Artefakt auf GitHub Pages veröffentlichen. Kein PDF.
+- Adressen: Skript <https://akornfellner.github.io/hak-mam-1/>, Folien
+  <https://akornfellner.github.io/hak-mam-1/folien/>. Im Skript führt der Link
+  „Folien“ in der Navigationsleiste (`book: navbar` in `_quarto.yml`) dorthin, er
+  funktioniert nur online bzw. mit `just online`.
+- Alle Verweise müssen relativ sein (kein führendes `/`), weil die Seite unter
+  `/hak-mam-1/` liegt. Vor Änderungen an Workflow, Profil oder Verweisen mit
+  `just online` testen: baut `_online/hak-mam-1/` wie der Workflow und liefert es
+  unter <http://localhost:8000/hak-mam-1/> aus.
 - Quarto- und uv-Version im Workflow = lokale Version (derzeit Quarto 1.10.18,
   uv 0.11.9). Bei einem Update beide anpassen.
 - Actions-Versionen vor Änderungen online prüfen, z. B.
@@ -74,6 +89,7 @@ der Benutzer jeweils vor.
 _quarto.yml, _quarto-folien.yml, _brand.yml
 _filters/, _includes/    Korrekturen für PDF und Mathe (siehe unten)
 _shortcodes/buch.lua     Kurzbefehl {{< buch … >}} für Übungsbeispiele aus dem Buch
+folien-uebersicht.qmd    Übersichtsseite der Folien (nur im Folien-Profil)
 _python/grafiken.py      gemeinsame matplotlib-Funktionen
 index.qmd                Startseite / Vorwort
 NN-kapitelname/          ein Ordner pro Kapitel (01-, 02-, …)

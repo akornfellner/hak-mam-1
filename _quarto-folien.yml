@@ -2,12 +2,19 @@
 # Rendern mit: quarto render --profile folien
 #
 # Ein Quarto-Buch kann keine Folien erzeugen. Dieses Profil schaltet deshalb auf
-# ein normales Projekt um und rendert nur die Foliendateien (folien-N.qmd).
+# eine Webseite um und rendert nur die Foliendateien (folien-N.qmd) und die
+# Übersichtsseite (folien-uebersicht.qmd → _folien/index.html).
+#
+# Der Projekttyp muss "website" sein (nicht "default"): Nur dann schreibt Quarto
+# das Logo aus _brand.yml mit relativem Pfad (../hak-logo.png) in die Folien.
+# Sonst steht dort /hak-logo.png, und das Logo fehlt, sobald die Folien in einem
+# Unterordner liegen (GitHub Pages: /hak-mam-1/folien/).
 
 project:
-  type: default
+  type: website
   output-dir: _folien
   render:
+    - folien-uebersicht.qmd
     - "*/folien-*.qmd"
   resources:
     - /hak-logo.png
