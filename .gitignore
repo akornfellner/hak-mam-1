@@ -37,3 +37,6 @@ Thumbs.db
 *.swp
 
 **/*.quarto_ipynb
+
+# Claude Code: persönliche Einstellungen
+.claude/settings.local.json

@@ -2,8 +2,8 @@
 --
 -- Erzeugt einen eigenen Kasten „Übungsbeispiele: 1.23, 1.24ab, 1.27“ mit Buch-Symbol,
 -- im Skript (HTML, PDF) und auf den Folien. Aussehen:
---   HTML und Folien: _includes/buchbeispiele.css
---   PDF:             Funktion buchbeispiele() in _includes/typst-anpassungen.typ
+--   HTML und Folien: buchbeispiele.css
+--   PDF:             Funktion buchbeispiele() in typst-anpassungen.typ
 
 -- Buch-Symbol (aufgeschlagenes Buch), Farbe kommt aus dem CSS
 local SYMBOL = '<svg viewBox="0 0 16 16" aria-hidden="true">'

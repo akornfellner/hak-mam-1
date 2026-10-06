@@ -1,7 +1,6 @@
 ---
 title: "Zahlen und Mengen"
-subtitle: "Mathematik und angewandte Mathematik – 1. Klasse HAK"
-format: revealjs
+format: hak-revealjs
 ---
 
 {{< include _1-1-zahlenmengen.qmd >}}

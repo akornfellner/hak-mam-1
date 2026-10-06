@@ -1,10 +1,12 @@
+# Buchprojekt des Skripts (HTML + PDF).
+# Design, Filter, Kurzbefehle und Format-Einstellungen kommen aus der Extension
+# in _extensions/hak/ (Repo hak-quarto). Hier steht nur, was zu diesem Skript gehört.
+
 project:
   type: book
   output-dir: _book
   # Python-Code läuft im Projektordner, damit "from _python.grafiken import *" klappt
   execute-dir: project
-
-lang: de
 
 book:
   title: "Mathematik und angewandte Mathematik"
@@ -21,34 +23,11 @@ book:
     - index.qmd
     - 01-zahlen-und-mengen/kapitel-1.qmd
 
-number-depth: 2
-
-# Python-Code (matplotlib-Grafiken) wird nie angezeigt, nur das Ergebnis
-jupyter: python3
-execute:
-  echo: false
-  warning: false
-
-# Kurzbefehle, z. B. {{< buch 1.23 1.24ab >}} für Buchbeispiele
-shortcodes:
-  - _shortcodes/buch.lua
-
-filters:
-  - _filters/pdf-nummerierung.lua
-  - _filters/deutsche-anfuehrungszeichen.lua
-  - _filters/intervallklammern.lua
-  - _filters/dezimalkomma.lua
+# Einstellungen für das PDF (das PDF verwendet "typst", nicht "hak-typst",
+# sonst ginge die Buchvorlage verloren)
+metadata-files:
+  - _extensions/hak/pdf.yml
 
 format:
-  html:
-    # Umschalter hell/dunkel; "brand" zuletzt, damit _brand.yml Vorrang hat
-    theme:
-      light: [cosmo, brand]
-      dark: [darkly, brand]
-    css: _includes/buchbeispiele.css
-    toc: true
-  typst:
-    papersize: a4
-    toc: true
-    toc-depth: 2
-    include-before-body: _includes/typst-anpassungen.typ
+  hak-html: default
+  typst: default

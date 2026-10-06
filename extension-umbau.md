@@ -25,10 +25,15 @@ Ausgangslage:
   Zurück geht es später mit `git revert --no-commit vor-extension-umbau..HEAD`
   (bzw. mit der Commit-Nummer statt des Tags), danach committen und pushen.
   Kein `git reset --hard`, kein force push.
-- Daneben liegt `~/Dokumente/Skript/quarto-hak`: ein leeres, öffentliches
-  GitHub-Repo (`akornfellner/quarto-hak`), bereits per SSH geklont.
-- Prüfe zuerst, ob du auf `../quarto-hak` zugreifen kannst. Falls nicht, sag
-  mir, dass ich `/add-dir ../quarto-hak` ausführen soll.
+- Daneben liegt `~/Dokumente/Skript/hak-quarto`: ein leeres, öffentliches
+  GitHub-Repo (`akornfellner/hak-quarto`), bereits per SSH geklont.
+- Übersicht auf GitHub: Alle zusammengehörigen Repos beginnen mit `hak-` und
+  tragen das Topic `mathe-skript`. Topics und angeheftete Repos stelle ich
+  selbst auf GitHub ein (`gh` ist auf diesem Rechner nicht installiert).
+  Erinnere mich am Ende daran und nimm „Topic `mathe-skript` setzen, Repo am
+  Profil anheften“ in die Checkliste „Neue Klasse anlegen“ auf.
+- Prüfe zuerst, ob du auf `../hak-quarto` zugreifen kannst. Falls nicht, sag
+  mir, dass ich `/add-dir ../hak-quarto` ausführen soll.
 
 ## Folien (Stand `909e614`, bitte mit dem Repo abgleichen)
 
@@ -52,15 +57,15 @@ Ausgangslage:
 
 ```
 ~/Dokumente/Skript/
-  quarto-hak/        Extension-Repo (Technik für alle Klassen)
+  hak-quarto/        Extension-Repo (Technik für alle Klassen)
   hak-mam-1/         Skript 1. Klasse
   hak-mam-2/ …       später, durch Klonen + Checkliste
 ```
 
-`quarto-hak` (alles, was alle Klassen gemeinsam haben):
+`hak-quarto` (alles, was alle Klassen gemeinsam haben):
 
 ```
-quarto-hak/
+hak-quarto/
   README.md                 Zweck, Installation, Update, Checkliste
                             „Neue Klasse anlegen“
   CLAUDE.md                 Regeln für die Arbeit am Extension-Repo selbst
@@ -109,11 +114,11 @@ hak-mam-1/
                             primfaktor_treppe; inzwischen evtl. mehr)
   CLAUDE.md                 kurz: 1. Klasse, Adressen, Import
                             @_extensions/hak/regeln.md, Hinweis „Allgemeines nur
-                            in ../quarto-hak ändern“
+                            in ../hak-quarto ändern“
   justfile                  import '_extensions/hak/hak.just' (+ Klassenbefehle)
-  .claude/settings.json     ../quarto-hak als zusätzlicher Ordner (additionalDirectories)
+  .claude/settings.json     ../hak-quarto als zusätzlicher Ordner (additionalDirectories)
   .github/workflows/pages.yml   nur wenige Zeilen: Auslöser (Push auf main) und
-                            Aufruf des Workflows aus akornfellner/quarto-hak
+                            Aufruf des Workflows aus akornfellner/hak-quarto
   pyproject.toml, uv.lock, .python-version, _environment, .gitignore,
   README.md, index.qmd, 01-…/
 ```
@@ -124,7 +129,7 @@ gemeinsamen aufruft. Geplant sind fünf Skripten (eines pro Klasse), deshalb
 soll auch der Workflow nur an einer Stelle gepflegt werden. Projekt-Einstellungen (`project:`, `book:`)
 kann eine Format-Extension nicht liefern, sie bleiben in `_quarto.yml` und
 `_quarto-folien.yml`. Kein Quarto-Template: neue Klassen entstehen durch Klonen
-des neuesten Skripts und die Checkliste im README von `quarto-hak`.
+des neuesten Skripts und die Checkliste im README von `hak-quarto`.
 
 Die Klasse („1. Klasse HAK“) und der Repo-Name (`hak-mam-1`) sollen nach dem
 Umbau an möglichst wenigen Stellen stehen. Heute: `_quarto.yml`, jede
@@ -135,28 +140,28 @@ in die Checkliste aufnehmen.
 ## Abläufe, die danach funktionieren sollen (in regeln.md / CLAUDE.md festhalten)
 
 - **Allgemeine Änderung beim Arbeiten an einer Klasse:** Claude ändert die
-  Datei in `../quarto-hak` (nie in `_extensions/` des Skripts), testet mit
-  `quarto add ../quarto-hak` im aktuellen Skript, committet in beiden Repos und
-  pusht `quarto-hak` erst nach Rückfrage.
+  Datei in `../hak-quarto` (nie in `_extensions/` des Skripts), testet mit
+  `quarto add ../hak-quarto` im aktuellen Skript, committet in beiden Repos und
+  pusht `hak-quarto` erst nach Rückfrage.
 - **Andere Klassen aktualisieren:** just-Befehl (z. B. `just extension`), der
-  die Extension von GitHub holt (`akornfellner/quarto-hak`), ohne Rückfragen;
+  die Extension von GitHub holt (`akornfellner/hak-quarto`), ohne Rückfragen;
   danach rendern und committen. Funktioniert auch ohne lokalen
-  `quarto-hak`-Ordner.
+  `hak-quarto`-Ordner.
 - **Alle Klassen auf einmal aktualisieren:** `just alle-aktualisieren` im
-  Ordner `quarto-hak`: geht der Reihe nach durch alle Nachbarordner
-  `../hak-mam-*`, aktualisiert dort die Extension aus dem lokalen `quarto-hak`
+  Ordner `hak-quarto`: geht der Reihe nach durch alle Nachbarordner
+  `../hak-mam-*`, aktualisiert dort die Extension aus dem lokalen `hak-quarto`
   und rendert zur Kontrolle (HTML, PDF, Folien). Am Ende eine Übersicht, in
   welchem Skript es geklappt hat und wo nicht. Nicht committen und nicht
   pushen, das mache ich bewusst pro Klasse. Skripten mit nicht committeten
   Änderungen überspringen und melden.
 - **Workflow ändern** (z. B. neue Quarto-Version): nur in
-  `quarto-hak/.github/workflows/pages.yml`. Die Skripten übernehmen das beim
+  `hak-quarto/.github/workflows/pages.yml`. Die Skripten übernehmen das beim
   nächsten Push von selbst.
-- **Neue Klasse:** Checkliste im README von `quarto-hak` (neue Git-Historie bzw.
+- **Neue Klasse:** Checkliste im README von `hak-quarto` (neue Git-Historie bzw.
   „Use this template“, Kapitel löschen, `grafiken.py` auf den Stil-Import
   reduzieren, Klasse und Repo-Name an allen verbleibenden Stellen anpassen,
   `index.qmd`, `uv sync`, Pages einschalten, mit `just online` testen).
-- **Neue Regeln:** allgemeine in `quarto-hak/_extensions/hak/regeln.md`,
+- **Neue Regeln:** allgemeine in `hak-quarto/_extensions/hak/regeln.md`,
   klassenspezifische in die CLAUDE.md des Skripts. Die „Pflege“-Regel der
   heutigen CLAUDE.md entsprechend umformulieren.
 
@@ -196,9 +201,9 @@ in die Checkliste aufnehmen.
      er für alle `folien-N.qmd` und die Übersichtsseite gilt?
    Wenn eine Frage zu einer anderen Lösung führt als oben geplant, frag mich
    vorher.
-4. `quarto-hak` aufbauen (Dateikopf-Kommentare wie bisher, alles auf Deutsch),
+4. `hak-quarto` aufbauen (Dateikopf-Kommentare wie bisher, alles auf Deutsch),
    inkl. README mit Checkliste und eigener CLAUDE.md.
-5. `hak-mam-1` umstellen: Extension mit `quarto add ../quarto-hak` einbinden,
+5. `hak-mam-1` umstellen: Extension mit `quarto add ../hak-quarto` einbinden,
    alte Dateien entfernen, die nun aus der Extension kommen, Konfiguration,
    CLAUDE.md, README und `justfile` kürzen, `.claude/settings.json` anlegen.
 6. Testen: HTML, PDF und Folien neu rendern und mit dem Vergleichsstand
@@ -215,19 +220,20 @@ in die Checkliste aufnehmen.
    HTML-Dateien darf kein Verweis mit führendem `/` stehen. `_online/` mit dem
    Vergleichsstand vergleichen.
 
-8. Workflow auf GitHub prüfen: Zuerst `quarto-hak` pushen (der Workflow muss
+8. Workflow auf GitHub prüfen: Zuerst `hak-quarto` pushen (der Workflow muss
    dort vorhanden sein), dann `hak-mam-1`. Den Lauf unter „Actions“ verfolgen
-   (`gh run watch`) und danach die echte Seite prüfen: Skript, Übersichtsseite
+   (mit `gh run watch`, falls `gh` installiert ist; sonst bitte mich, den Lauf
+   im Browser anzusehen, und warte auf meine Rückmeldung) und danach die echte Seite prüfen: Skript, Übersichtsseite
    und Folien mit Logo unter <https://akornfellner.github.io/hak-mam-1/>.
    Schlägt der Lauf fehl, bleibt die alte Version online; sag mir trotzdem
    sofort Bescheid und schlage vor, wie es weitergeht (notfalls Rückfallpunkt).
-9. `just alle-aktualisieren` in `quarto-hak` ausprobieren (derzeit nur ein
+9. `just alle-aktualisieren` in `hak-quarto` ausprobieren (derzeit nur ein
    Skript).
 10. Abschluss: eine ausführliche Erklärung der neuen Struktur, im Chat und
-    dauerhaft im README von `quarto-hak` (die README der Skripten verweist
+    dauerhaft im README von `hak-quarto` (die README der Skripten verweist
     darauf). Für mich geschrieben: Ich kenne das Skript gut, Git und die
     Quarto-Technik aber wenig. Inhalt:
-    - Wo liegt was: jede Datei bzw. jeder Ordner in `quarto-hak` und in einem
+    - Wo liegt was: jede Datei bzw. jeder Ordner in `hak-quarto` und in einem
       Skript mit einem Satz zum Zweck.
     - „Ich will … ändern“ als Tabelle mit Ort und nötigen Schritten danach,
       mindestens für: Farbe/Schrift/Logo, Aussehen der Buchbeispiel-Kästen,

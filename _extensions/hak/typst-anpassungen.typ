@@ -1,5 +1,5 @@
 // Anpassungen der Buchvorlage "orange-book" für das PDF
-// (wird nach book.with() eingebunden und überschreibt deren Einstellungen)
+// (wird über pdf.yml nach book.with() eingebunden und überschreibt deren Einstellungen)
 
 // Fließtextschrift aus _brand.yml (orange-book übernimmt sie nicht automatisch)
 #set text(font: "Lato")
@@ -10,7 +10,7 @@
 // Formeln nicht nummerieren
 #set math.equation(numbering: none)
 
-// Kasten für Buchbeispiele ({{< buch … >}}, siehe _shortcodes/buch.lua)
+// Kasten für Buchbeispiele ({{< buch … >}}, siehe buch.lua)
 #let buchbeispiele(nummern) = {
   let farbe = brand-color.primary
   block(

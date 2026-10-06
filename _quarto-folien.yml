@@ -5,10 +5,11 @@
 # eine Webseite um und rendert nur die Foliendateien (folien-N.qmd) und die
 # Übersichtsseite (folien-uebersicht.qmd → _folien/index.html).
 #
-# Der Projekttyp muss "website" sein (nicht "default"): Nur dann schreibt Quarto
-# das Logo aus _brand.yml mit relativem Pfad (../hak-logo.png) in die Folien.
-# Sonst steht dort /hak-logo.png, und das Logo fehlt, sobald die Folien in einem
-# Unterordner liegen (GitHub Pages: /hak-mam-1/folien/).
+# Der Projekttyp muss "website" sein (nicht "default"): Nur dann bindet Quarto
+# das Logo aus der Extension mit relativem Pfad ein. Sonst fehlt es, sobald die
+# Folien in einem Unterordner liegen (GitHub Pages: /<repo>/folien/).
+#
+# Folien-Einstellungen für alle Klassen stehen in der Extension (hak-revealjs).
 
 project:
   type: website
@@ -16,10 +17,6 @@ project:
   render:
     - folien-uebersicht.qmd
     - "*/folien-*.qmd"
-  resources:
-    - /hak-logo.png
 
-format:
-  revealjs:
-    slide-level: 4
-    css: _includes/buchbeispiele.css
+# Untertitel aller Folien und der Übersichtsseite (Fach und Klasse)
+subtitle: "Mathematik und angewandte Mathematik – 1. Klasse HAK"

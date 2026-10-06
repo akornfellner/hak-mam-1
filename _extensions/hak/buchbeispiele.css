@@ -1,4 +1,4 @@
-/* Kasten für Buchbeispiele ({{< buch … >}}, siehe _shortcodes/buch.lua).
+/* Kasten für Buchbeispiele ({{< buch … >}}, siehe buch.lua).
    Farben kommen aus _brand.yml: im HTML --bs-primary (hell/dunkel), auf den
    Folien --brand-hak-rot. */
 

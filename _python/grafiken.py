@@ -1,4 +1,4 @@
-"""Hilfsfunktionen für die matplotlib-Grafiken im Skript.
+"""Zeichnungen für die matplotlib-Grafiken dieses Skripts.
 
 Einbinden in einer .qmd-Datei (Code wird dank `echo: false` nie angezeigt):
 
@@ -7,34 +7,17 @@ Einbinden in einer .qmd-Datei (Code wird dank `echo: false` nie angezeigt):
     from _python.grafiken import *
     ```
 
-Stil laut CLAUDE.md: Linien schwarz, Flächen hellrot, Schrift sans-serif,
-weißer Hintergrund (damit die Grafik auch im dunklen HTML-Modus lesbar ist).
+Farben, Schrift, `zahl()` und `tausender()` sind für alle Klassen gleich und
+kommen aus `_extensions/hak/stil.py` (Repo hak-quarto, dort ändern). Hier stehen
+nur die Zeichnungen, die diese Klasse braucht.
 """
 
-import matplotlib.pyplot as plt
-import numpy as np
+import sys
+from pathlib import Path
 
-SCHWARZ = "#000000"
-ROT = "#CE1F2C"
-HELLROT = "#EBA5AB"
-
-plt.rcParams.update({
-    "font.family": "sans-serif",
-    "font.size": 13,
-    "mathtext.fontset": "dejavusans",
-    "figure.facecolor": "white",
-    "savefig.facecolor": "white",
-    "savefig.bbox": "tight",
-})
-
-
-def zahl(x):
-    """Zahl österreichisch formatieren: Dezimalkomma, echtes Minuszeichen."""
-    if float(x).is_integer():
-        text = str(int(x))
-    else:
-        text = f"{x:g}".replace(".", ",")
-    return text.replace("-", "−")
+# Stil aus der Extension laden (Farben, rcParams, zahl(), tausender(), plt, np)
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "_extensions" / "hak"))
+from stil import *  # noqa: E402,F401,F403
 
 
 def zahlengerade(von, bis, intervalle=(), punkte=(), schritt=1,
@@ -81,11 +64,6 @@ def zahlengerade(von, bis, intervalle=(), punkte=(), schritt=1,
         ax.plot(x, 0, "o", ms=9, color=ROT, zorder=4)
 
     return fig
-
-
-def tausender(n):
-    """Ganze Zahl mit Leerzeichen als Tausendertrennzeichen: 1092 → „1 092“."""
-    return f"{n:,}".replace(",", " ").replace("-", "−")
 
 
 def primfaktoren(n):
