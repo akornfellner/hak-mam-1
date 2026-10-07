@@ -474,7 +474,7 @@ Jede Zahlenmenge ist in der nächstgrößeren enthalten.
 
 {{< buch 1.10 1.11 >}}
 
-#### Teilmengen der reellen Zahlen beschreiben {#sec-mengen-in-r}
+#### Beschreibende Schreibweise {#sec-beschreibende-schreibweise}
 
 ::: {.content-hidden when-format="revealjs"}
 **Einführungsbeispiel:** Bei der Post kostet ein Paket **bis 2 kg** weniger als ein
