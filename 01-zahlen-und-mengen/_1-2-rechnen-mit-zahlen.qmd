@@ -332,6 +332,64 @@ $$
 13 \cdot 6 + 13 \cdot 4 = 13 \cdot (6 + 4) = 130
 $$
 
+{{< buch 1.012 1.016 1.017 1.022 1.048  >}}
+
+#### Betrag {#sec-betrag}
+
+::: {.content-hidden when-format="revealjs"}
+Auf der Zahlengerade liegen $3$ und $-3$ auf verschiedenen Seiten des Nullpunkts,
+aber beide sind **gleich weit** von ihm entfernt, nämlich $3$ Einheiten. Diesen
+Abstand zum Nullpunkt nennt man den **Betrag** der Zahl. Ein Abstand ist nie
+negativ, das Vorzeichen spielt also keine Rolle.
+:::
+
+```{python}
+#| label: fig-betrag
+#| fig-cap: "$3$ und $-3$ haben denselben Abstand zum Nullpunkt"
+fig = zahlengerade(-5, 5, punkte=[-3, 3], hoehe=1.3)
+ax = fig.axes[0]
+ax.set_ylim(-0.8, 1.1)
+for x in (-3, 3):
+    ax.annotate("", xy=(x, 0.4), xytext=(0, 0.4),
+                arrowprops=dict(arrowstyle="<|-|>", color=ROT, lw=1.5,
+                                shrinkA=0, shrinkB=0))
+    ax.text(x / 2, 0.55, "3 Einheiten", ha="center", va="bottom", color=ROT)
+ax.plot([0, 0], [0.1, 0.6], color=SCHWARZ, lw=1.2);
+```
+
+::: {.callout-note title="Definition: Betrag"}
+Der **Betrag** $|z|$ einer Zahl $z$ ist ihr **Abstand zum Nullpunkt** auf der
+Zahlengerade. Der Betrag ist nie negativ.
+
+$$
+|z| = \begin{cases} z & \text{für } z \geq 0 \\ -z & \text{für } z < 0 \end{cases}
+$$
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+**Beispiel:**
+
+$$
+|3| = 3 \qquad |-3| = 3 \qquad |0| = 0 \qquad |-2{,}5| = 2{,}5
+$$
+
+::: {.content-hidden when-format="revealjs"}
+Die Betragsstriche wirken wie eine Klammer: Zuerst rechnet man aus, was zwischen
+ihnen steht, dann nimmt man den Betrag. Ein Minus **vor** den Betragsstrichen bleibt
+stehen.
+:::
+
+**Beispiel:**
+
+$$
+|4 - 9| = |-5| = 5 \qquad -|-7| = -7
+$$
+
+{{< buch 1.054 1.055 1.056  >}}
+
 ### Bruchrechnung {#sec-bruchrechnung}
 
 ::: {.callout-important title="Merke"}
@@ -416,6 +474,8 @@ Teiler** (ggT) von Zähler und Nenner.
 Kürzen darf man nur Faktoren, nie einzelne Summanden:
 $\frac{2 + 3}{2} = \frac{5}{2}$, aber **nicht** $3$.
 :::
+
+{{< buch 1.066 1.068 1.069  >}}
 
 #### Primfaktorzerlegung {#sec-primfaktorzerlegung}
 
@@ -540,6 +600,8 @@ $$
 \frac{1\,092}{1\,872} = \frac{1\,092 : 156}{1\,872 : 156} = \frac{7}{12}
 $$
 
+{{< buch 1.026 1.027 1.028 >}}
+
 #### Addition und Subtraktion {#sec-brueche-addieren}
 
 ::: {.content-hidden when-format="revealjs"}
@@ -613,14 +675,6 @@ $$
 
 #### Multiplikation und Division {#sec-brueche-multiplizieren}
 
-::: {.content-hidden when-format="revealjs"}
-**Einführungsbeispiel:** Vom Geburtstagsfest ist noch eine halbe Torte übrig. Davon
-isst du am nächsten Tag $\frac{2}{3}$. Welcher Anteil der ganzen Torte ist das?
-„$\frac{2}{3}$ **von** $\frac{1}{2}$“ bedeutet $\frac{2}{3} \cdot \frac{1}{2}$:
-Die halbe Torte wird in $3$ Teile geteilt, das sind Sechstel, und du isst $2$ davon.
-Das ist $\frac{2}{6} = \frac{1}{3}$ der Torte.
-:::
-
 ::: {.callout-note title="Definition: Multiplikation von Brüchen"}
 Zähler mal Zähler, Nenner mal Nenner.
 
@@ -654,15 +708,6 @@ $$
 * * *
 :::
 
-::: {.content-hidden when-format="revealjs"}
-**Einführungsbeispiel:** In einer Flasche sind $\frac{3}{4}$ Liter Saft. Wie viele
-Gläser mit je $\frac{1}{8}$ Liter kann man damit füllen? Gefragt ist, wie oft
-$\frac{1}{8}$ in $\frac{3}{4}$ hineinpasst, also $\frac{3}{4} : \frac{1}{8}$. Ein
-Viertelliter sind zwei Achtelliter, drei Viertelliter also sechs Achtelliter. Man
-kann $6$ Gläser füllen, und genau das liefert auch die Rechnung
-$\frac{3}{4} \cdot \frac{8}{1} = \frac{24}{4} = 6$.
-:::
-
 ::: {.callout-note title="Definition: Division von Brüchen"}
 Man dividiert durch einen Bruch, indem man mit seinem **Kehrwert** multipliziert.
 Den Kehrwert erhält man, indem man Zähler und Nenner vertauscht.
@@ -683,3 +728,5 @@ $$
 Nur beim Dividieren wird der Kehrwert gebildet, und zwar nur vom **zweiten** Bruch
 (dem, durch den man dividiert).
 :::
+
+{{< buch 1.072 1.073 1.074  >}}

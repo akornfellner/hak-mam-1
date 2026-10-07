@@ -638,4 +638,4 @@ Die Klammer „umarmt“ die Zahl, wenn sie dazugehört: $[2$. Dreht sie der Zah
 Rücken zu, gehört die Zahl nicht dazu: $]2$.
 :::
 
-{{< buch 1.13-1.22 >}}
+{{< buch 1.105 1.106 >}}
