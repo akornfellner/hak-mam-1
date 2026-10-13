@@ -730,3 +730,409 @@ Nur beim Dividieren wird der Kehrwert gebildet, und zwar nur vom **zweiten** Bru
 :::
 
 {{< buch 1.072 1.073 1.074  >}}
+
+### Prozent und Promille {#sec-prozent-promille}
+
+#### Prozent als Dezimalzahl {#sec-prozent-dezimalzahl}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** Im Abverkauf steht auf einem Schild „$-30\,\%$“, auf dem
+Sparbuch gibt es $3\,\%$ Zinsen, und der Akku deines Handys zeigt $50\,\%$. Das Wort
+„Prozent“ kommt vom lateinischen „pro centum“ und bedeutet **„von hundert“**.
+$30\,\%$ sind also $30$ von $100$, als Bruch $\frac{30}{100}$ und als Dezimalzahl
+$0{,}3$. Das Prozentzeichen ist nur eine **andere Schreibweise für „Hundertstel“**.
+:::
+
+::: {.callout-note title="Definition: Prozent"}
+Ein **Prozent** ist ein Hundertstel.
+
+$$
+1\,\% = \frac{1}{100} = 0{,}01
+$$
+:::
+
+::: {.callout-important title="Merke"}
+Jede Prozentzahl ist eine **Dezimalzahl**. Man dividiert durch $100$, das Komma
+rückt also um **zwei Stellen nach links**.
+
+$$
+30\,\% = 0{,}3 \qquad 3\,\% = 0{,}03 \qquad 103\,\% = 1{,}03
+$$
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+| Prozent | Bruch | Dezimalzahl |
+|---|---|---|
+| $1\,\%$ | $\frac{1}{100}$ | $0{,}01$ |
+| $3\,\%$ | $\frac{3}{100}$ | $0{,}03$ |
+| $30\,\%$ | $\frac{30}{100}$ | $0{,}3$ |
+| $100\,\%$ | $\frac{100}{100}$ | $1$ |
+| $103\,\%$ | $\frac{103}{100}$ | $1{,}03$ |
+| $0{,}5\,\%$ | $\frac{0{,}5}{100}$ | $0{,}005$ |
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Umgekehrt wird aus jeder Dezimalzahl eine Prozentzahl, indem man mit $100$
+multipliziert. Das Komma rückt um zwei Stellen nach rechts:
+:::
+
+**Beispiel:**
+
+$$
+0{,}25 = 25\,\% \qquad 0{,}07 = 7\,\% \qquad 1{,}2 = 120\,\% \qquad 0{,}004 = 0{,}4\,\%
+$$
+
+::: {.callout-tip title="Tipp: 3 % ist nicht 0,3"}
+Der häufigste Fehler: $3\,\% = 0{,}03$ und **nicht** $0{,}3$. Bei einstelligen
+Prozentzahlen steht nach dem Komma zuerst eine Null.
+:::
+
+{{< buch 1.111 1.112 1.113 1.114 1.115 >}}
+
+#### Grundwert, Prozentsatz und Anteil {#sec-grundwert-prozentsatz-anteil}
+
+::: {.content-hidden when-format="revealjs"}
+In jeder Prozentrechnung kommen drei Größen vor. Zwei davon sind gegeben, die dritte
+wird gesucht. In „$30\,\%$ von $480$ € sind $144$ €“ sind $480$ € das Ganze, von dem
+man ausgeht, $30\,\%$ sagen, wie viel davon gemeint ist, und $144$ € sind dieser Teil.
+:::
+
+::: {.callout-note title="Definition: Grundwert, Prozentsatz, Anteil"}
+- **Grundwert** $G$: das Ganze, also $100\,\%$
+- **Prozentsatz** $p$: sagt, wie viel vom Ganzen gemeint ist (als Dezimalzahl)
+- **Anteil** $A$: der Teil vom Ganzen, der dem Prozentsatz entspricht
+
+$$
+A = G \cdot p
+$$
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+```{python}
+#| label: fig-prozentstreifen
+#| fig-cap: "$30\\,\\%$ von $480$ € sind $144$ €"
+fig, ax = plt.subplots(figsize=(7, 1.5))
+ax.set_xlim(-4, 108)
+ax.set_ylim(-0.9, 1.9)
+ax.axis("off")
+
+# Streifen: der ganze Streifen ist der Grundwert, der rote Teil der Anteil
+ax.add_patch(plt.Rectangle((0, 0), 30, 1, fc=HELLROT, ec="none"))
+ax.add_patch(plt.Rectangle((0, 0), 100, 1, fc="none", ec=SCHWARZ, lw=1.5))
+ax.plot([30, 30], [0, 1], color=SCHWARZ, lw=1.5)
+
+for x, oben, unten in ((0, "0 %", "0 €"), (30, "$p$ = 30 %", "$A$ = 144 €"),
+                       (100, "100 %", "$G$ = 480 €")):
+    ax.text(x, 1.2, oben, ha="center", va="bottom")
+    ax.text(x, -0.2, unten, ha="center", va="top")
+ax.text(15, 0.5, "Anteil", ha="center", va="center", color=ROT);
+```
+
+::: {.callout-important title="Merke"}
+„**von**“ bedeutet „**mal**“: $30\,\%$ von $480$ heißt $0{,}3 \cdot 480$.
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Jede der drei Größen kann gesucht sein. Für jede gibt es zwei Rechenwege:
+
+1. **mit der Dezimalzahl:** Man schreibt den Prozentsatz als Dezimalzahl und rechnet
+   mit der Formel. Das ist der kürzere Weg.
+2. **als Schlussrechnung:** Man schließt zuerst auf $1\,\%$ (bzw. auf eine Einheit)
+   und dann auf den gesuchten Wert.
+
+Beide Wege liefern dasselbe Ergebnis.
+:::
+
+#### Anteil berechnen {#sec-anteil-berechnen}
+
+$$
+A = G \cdot p
+$$
+
+**Beispiel:** Ein Fahrrad kostet $480$ €. Beim Kauf sind $30\,\%$ als Anzahlung zu
+bezahlen. Wie hoch ist die Anzahlung?
+
+$$
+G = 480 \text{ €} \qquad p = 30\,\% = 0{,}3 \qquad A = \text{?}
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+**1. mit der Dezimalzahl:**
+
+$$
+A = G \cdot p = 480 \cdot 0{,}3 = 144 \text{ €}
+$$
+
+**2. als Schlussrechnung:**
+
+::: {.content-hidden when-format="revealjs"}
+Der ganze Preis sind $100\,\%$. Man dividiert durch $100$ und erhält $1\,\%$, dann
+multipliziert man mit $30$.
+:::
+
+$$
+\begin{aligned}
+100\,\% &\ \ldots\ 480 \text{ €} \\
+1\,\% &\ \ldots\ 480 : 100 = 4{,}80 \text{ €} \\
+30\,\% &\ \ldots\ 4{,}80 \cdot 30 = 144 \text{ €}
+\end{aligned}
+$$
+
+::: {.content-hidden when-format="revealjs"}
+Die Anzahlung beträgt $144$ €.
+:::
+
+{{< buch 1.117-1.124 >}}
+
+#### Prozentsatz berechnen {#sec-prozentsatz-berechnen}
+
+$$
+p = \frac{A}{G}
+$$
+
+**Beispiel:** In einer Klasse sind $25$ Schülerinnen und Schüler. $7$ davon kommen
+mit dem Fahrrad zur Schule. Wie viel Prozent sind das?
+
+$$
+G = 25 \qquad A = 7 \qquad p = \text{?}
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+**1. mit der Dezimalzahl:**
+
+$$
+p = \frac{A}{G} = \frac{7}{25} = 0{,}28 = 28\,\%
+$$
+
+**2. als Schlussrechnung:**
+
+::: {.content-hidden when-format="revealjs"}
+Die ganze Klasse sind $100\,\%$. Man dividiert durch $25$ und erhält den Prozentsatz
+für eine Person, dann multipliziert man mit $7$.
+:::
+
+$$
+\begin{aligned}
+25 \text{ Personen} &\ \ldots\ 100\,\% \\
+1 \text{ Person} &\ \ldots\ 100 : 25 = 4\,\% \\
+7 \text{ Personen} &\ \ldots\ 4 \cdot 7 = 28\,\%
+\end{aligned}
+$$
+
+::: {.content-hidden when-format="revealjs"}
+$28\,\%$ der Klasse kommen mit dem Fahrrad.
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.callout-tip title="Tipp: Ergebnis des Taschenrechners"}
+Der Taschenrechner zeigt $0{,}28$ an. Das **ist** schon der Prozentsatz, nur als
+Dezimalzahl geschrieben: $0{,}28 = 28\,\%$.
+:::
+
+{{< buch 1.143-1.150 >}}
+
+#### Grundwert berechnen {#sec-grundwert-berechnen}
+
+$$
+G = \frac{A}{p}
+$$
+
+**Beispiel:** Jonas hat für ein neues Handy schon $126$ € gespart. Das sind $35\,\%$
+des Preises. Wie viel kostet das Handy?
+
+$$
+A = 126 \text{ €} \qquad p = 35\,\% = 0{,}35 \qquad G = \text{?}
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+**1. mit der Dezimalzahl:**
+
+$$
+G = \frac{A}{p} = \frac{126}{0{,}35} = 360 \text{ €}
+$$
+
+**2. als Schlussrechnung:**
+
+::: {.content-hidden when-format="revealjs"}
+Hier kennt man $35\,\%$. Man dividiert durch $35$ und erhält $1\,\%$, dann
+multipliziert man mit $100$ und erhält das Ganze.
+:::
+
+$$
+\begin{aligned}
+35\,\% &\ \ldots\ 126 \text{ €} \\
+1\,\% &\ \ldots\ 126 : 35 = 3{,}60 \text{ €} \\
+100\,\% &\ \ldots\ 3{,}60 \cdot 100 = 360 \text{ €}
+\end{aligned}
+$$
+
+::: {.content-hidden when-format="revealjs"}
+Das Handy kostet $360$ €.
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.callout-important title="Merke"}
+$$
+A = G \cdot p \qquad p = \frac{A}{G} \qquad G = \frac{A}{p}
+$$
+
+Der Prozentsatz $p$ wird immer als **Dezimalzahl** eingesetzt.
+:::
+
+{{< buch 1.135-1.140 >}}
+
+#### Änderungsfaktor {#sec-aenderungsfaktor}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** Eine Monatskarte kostet $50$ € und wird um $3\,\%$ teurer.
+Man kann zuerst die Erhöhung ausrechnen und sie dann dazuzählen:
+
+$$
+50 \cdot 0{,}03 = 1{,}50 \text{ €} \qquad 50 + 1{,}50 = 51{,}50 \text{ €}
+$$
+
+Schneller geht es in **einem** Schritt. Der alte Preis sind $100\,\%$, dazu kommen
+$3\,\%$. Der neue Preis sind also $103\,\%$ des alten Preises, und $103\,\%$ ist die
+Dezimalzahl $1{,}03$:
+
+$$
+50 \cdot 1{,}03 = 51{,}50 \text{ €}
+$$
+
+Wird die Karte stattdessen um $3\,\%$ billiger, bleiben $100\,\% - 3\,\% = 97\,\%$
+übrig, also $50 \cdot 0{,}97 = 48{,}50$ €. Die Zahl, mit der man multipliziert, heißt
+**Änderungsfaktor**.
+:::
+
+::: {.callout-note title="Definition: Änderungsfaktor"}
+Ändert sich ein Wert um den Prozentsatz $p$, multipliziert man ihn mit dem
+**Änderungsfaktor**.
+
+$$
+\text{neuer Wert} = \text{alter Wert} \cdot \text{Änderungsfaktor}
+$$
+
+- **Erhöhung** um $p$: Änderungsfaktor $1 + p$
+- **Verminderung** um $p$: Änderungsfaktor $1 - p$
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+| Formulierung | Rechnung | Änderungsfaktor |
+|---|---|---|
+| wird um $3\,\%$ erhöht | $100\,\% + 3\,\% = 103\,\%$ | $\cdot\ 1{,}03$ |
+| wird um $3\,\%$ vermindert | $100\,\% - 3\,\% = 97\,\%$ | $\cdot\ 0{,}97$ |
+| wird um $20\,\%$ erhöht | $100\,\% + 20\,\% = 120\,\%$ | $\cdot\ 1{,}2$ |
+| wird um $20\,\%$ vermindert | $100\,\% - 20\,\% = 80\,\%$ | $\cdot\ 0{,}8$ |
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+**Beispiel:** Ein Preis von $250$ € wird um $3\,\%$ erhöht bzw. um $3\,\%$ vermindert.
+
+$$
+250 \cdot 1{,}03 = 257{,}50 \text{ €} \qquad 250 \cdot 0{,}97 = 242{,}50 \text{ €}
+$$
+
+::: {.content-hidden when-format="revealjs"}
+Umgekehrt erkennt man am Änderungsfaktor sofort, um wie viel Prozent sich ein Wert
+geändert hat. Ist der Faktor größer als $1$, wird der Wert größer, ist er kleiner
+als $1$, wird der Wert kleiner:
+:::
+
+**Beispiel:**
+
+$$
+\cdot\ 1{,}15 \ \text{ bedeutet } +15\,\% \qquad \cdot\ 0{,}85 \ \text{ bedeutet } -15\,\%
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Kennt man den neuen Wert und sucht den alten, **dividiert** man durch den
+Änderungsfaktor:
+:::
+
+**Beispiel:** Nach einer Preiserhöhung um $20\,\%$ kostet eine Jacke $90$ €. Wie viel
+hat sie vorher gekostet?
+
+$$
+\text{alter Wert} = \frac{\text{neuer Wert}}{\text{Änderungsfaktor}}
+= \frac{90}{1{,}2} = 75 \text{ €}
+$$
+
+::: {.callout-tip title="Tipp: Erhöhen und wieder vermindern"}
+Wird ein Wert um $20\,\%$ erhöht und danach um $20\,\%$ vermindert, kommt **nicht**
+der alte Wert heraus. Die $20\,\%$ werden beim zweiten Mal von einem größeren Wert
+berechnet:
+
+$$
+1{,}2 \cdot 0{,}8 = 0{,}96
+$$
+:::
+
+{{< buch 1.125-1.133 >}}
+
+#### Vermischte Aufgaben
+
+{{< buch 1.152-1.166 >}}
+
+#### Promille {#sec-promille}
+
+::: {.content-hidden when-format="revealjs"}
+Bei sehr kleinen Anteilen, zum Beispiel beim Alkohol im Blut, rechnet man mit
+**Promille**. Das bedeutet „von tausend“. Alles funktioniert genauso wie bei Prozent,
+nur steht überall $1\,000$ statt $100$.
+:::
+
+::: {.callout-note title="Definition: Promille"}
+Ein **Promille** ist ein Tausendstel.
+
+$$
+1\,‰ = \frac{1}{1\,000} = 0{,}001
+$$
+:::
+
+**Beispiel:**
+
+$$
+3\,‰ = 0{,}003 \qquad 25\,‰ = 0{,}025 \qquad 10\,‰ = 0{,}01 = 1\,\%
+$$
+
+**Beispiel:** Eine Versicherung kostet im Jahr $2\,‰$ vom Wert des Hauses. Das Haus
+ist $350\,000$ € wert.
+
+$$
+A = G \cdot p = 350\,000 \cdot 0{,}002 = 700 \text{ €}
+$$
+
+{{< buch 1.167-1.177 >}}
