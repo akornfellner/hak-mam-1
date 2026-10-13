@@ -61,97 +61,6 @@ Der Taschenrechner kennt die Vorrangregeln. Wenn du eine andere Reihenfolge will
 musst du die Klammern eintippen.
 :::
 
-#### Potenzen mit negativer Basis {#sec-potenzen-negativ}
-
-::: {.content-hidden when-format="revealjs"}
-**Einführungsbeispiel:** Lena tippt $-2^2$ in den Taschenrechner und bekommt $-4$.
-Ihr Sitznachbar tippt $(-2)^2$ und bekommt $4$. Hat sich einer der beiden vertippt?
-Nein, beide Ergebnisse stimmen. Es kommt nur darauf an, **was** potenziert wird.
-:::
-
-::: {.callout-note title="Definition: Potenz"}
-Eine **Potenz** ist eine Kurzschreibweise für ein Produkt aus lauter gleichen
-Faktoren:
-
-$$
-a^n = \underbrace{a \cdot a \cdot \ldots \cdot a}_{n \text{ Faktoren}}
-$$
-
-$a$ heißt **Basis** (Grundzahl), $n$ heißt **Exponent** (Hochzahl).
-:::
-
-::: {.content-visible when-format="revealjs"}
-* * *
-:::
-
-::: {.content-hidden when-format="revealjs"}
-Ist die Basis negativ, entscheidet die Anzahl der Faktoren über das Vorzeichen.
-Jeweils zwei Minus ergeben zusammen ein Plus:
-:::
-
-**Beispiel:**
-
-$$
-(-2)^1 = -2 \qquad (-2)^2 = (-2) \cdot (-2) = 4 \qquad
-(-2)^3 = (-2) \cdot (-2) \cdot (-2) = -8 \qquad (-2)^4 = 16
-$$
-
-::: {.callout-important title="Merke"}
-- Negative Basis, **gerader** Exponent: Das Ergebnis ist **positiv**.
-- Negative Basis, **ungerader** Exponent: Das Ergebnis ist **negativ**.
-:::
-
-::: {.content-visible when-format="revealjs"}
-* * *
-:::
-
-::: {.content-hidden when-format="revealjs"}
-Die Klammer ist dabei entscheidend. Ohne Klammer gehört der Exponent nur zur Zahl,
-nicht zum Minus. Wegen „Potenz vor Strich“ wird zuerst potenziert und erst dann das
-Minus davorgeschrieben:
-:::
-
-**Beispiel:**
-
-$$
-(-3)^2 = (-3) \cdot (-3) = 9 \qquad -3^2 = -(3 \cdot 3) = -9
-$$
-
-#### Hochzahl null {#sec-hochzahl-null}
-
-::: {.content-hidden when-format="revealjs"}
-**Einführungsbeispiel:** Ein Blatt Papier wird immer wieder in der Mitte gefaltet.
-Nach jedem Falten liegen doppelt so viele Lagen übereinander: $2^1 = 2$,
-$2^2 = 4$, $2^3 = 8$ usw. Und bevor man überhaupt faltet? Da liegt genau **eine**
-Lage, also $2^0 = 1$.
-
-Das sieht man auch, wenn man in der Reihe der Potenzen rückwärts geht: Wird der
-Exponent um $1$ kleiner, halbiert sich das Ergebnis.
-:::
-
-$$
-2^3 = 8 \qquad 2^2 = 4 \qquad 2^1 = 2 \qquad 2^0 = 1
-$$
-
-::: {.callout-important title="Merke"}
-Jede Zahl (außer $0$) hoch $0$ ergibt $1$:
-
-$$
-a^0 = 1 \quad \text{für } a \neq 0
-$$
-:::
-
-**Beispiel:**
-
-$$
-5^0 = 1 \qquad (-7)^0 = 1 \qquad 1\,000\,000^0 = 1 \qquad -7^0 = -1
-$$
-
-::: {.content-hidden when-format="revealjs"}
-Beim letzten Beispiel fehlt die Klammer: Nur die $7$ wird hoch $0$ genommen, das
-Minus bleibt stehen.
-:::
-
 #### Division durch null {#sec-division-durch-null}
 
 ::: {.content-hidden when-format="revealjs"}
@@ -1090,6 +999,10 @@ $$
 = \frac{90}{1{,}2} = 75 \text{ €}
 $$
 
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
 ::: {.callout-tip title="Tipp: Erhöhen und wieder vermindern"}
 Wird ein Wert um $20\,\%$ erhöht und danach um $20\,\%$ vermindert, kommt **nicht**
 der alte Wert heraus. Die $20\,\%$ werden beim zweiten Mal von einem größeren Wert
@@ -1102,7 +1015,7 @@ $$
 
 {{< buch 1.125-1.133 >}}
 
-#### Vermischte Aufgaben
+#### Vermischte Aufgaben {#sec-prozent-vermischte-aufgaben}
 
 {{< buch 1.152-1.166 >}}
 
@@ -1128,6 +1041,10 @@ $$
 3\,‰ = 0{,}003 \qquad 25\,‰ = 0{,}025 \qquad 10\,‰ = 0{,}01 = 1\,\%
 $$
 
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
 **Beispiel:** Eine Versicherung kostet im Jahr $2\,‰$ vom Wert des Hauses. Das Haus
 ist $350\,000$ € wert.
 
@@ -1136,3 +1053,345 @@ A = G \cdot p = 350\,000 \cdot 0{,}002 = 700 \text{ €}
 $$
 
 {{< buch 1.167-1.177 >}}
+
+### Potenzen {#sec-potenzen}
+
+#### Was ist eine Potenz? {#sec-potenz-begriff}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** Statt $3 + 3 + 3 + 3 + 3$ schreibt man kürzer $5 \cdot 3$.
+Die Multiplikation ist also eine Kurzschreibweise für eine Addition mit lauter
+gleichen Summanden. Genauso gibt es eine Kurzschreibweise für eine Multiplikation mit
+lauter gleichen Faktoren: Statt $3 \cdot 3 \cdot 3 \cdot 3 \cdot 3$ schreibt man
+$3^5$. Die kleine hochgestellte Zahl sagt, **wie oft** die $3$ als Faktor vorkommt.
+:::
+
+::: {.callout-note title="Definition: Potenz"}
+Eine **Potenz** ist eine Kurzschreibweise für ein Produkt aus lauter gleichen
+Faktoren.
+
+$$
+a^n = \underbrace{a \cdot a \cdot \ldots \cdot a}_{n \text{ Faktoren}}
+$$
+
+- $a$ heißt **Basis** (Grundzahl): die Zahl, die mit sich selbst multipliziert wird
+- $n$ heißt **Exponent** (Hochzahl): sagt, wie oft die Basis als Faktor vorkommt
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+| Schreibweise | Sprechweise |
+|---|---|
+| $3^5$ | „drei hoch fünf“ |
+| $a^n$ | „a hoch n“ |
+| $a^2$ | „a hoch zwei“ oder „a Quadrat“ |
+
+**Beispiel:**
+
+$$
+3^5 = 3 \cdot 3 \cdot 3 \cdot 3 \cdot 3 = 243 \qquad 10^3 = 10 \cdot 10 \cdot 10 = 1\,000
+\qquad 7^1 = 7
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Die Basis muss keine natürliche Zahl sein. Ist sie ein Bruch oder eine negative
+Zahl, schreibt man sie in eine Klammer:
+:::
+
+**Beispiel:**
+
+$$
+0{,}1^2 = 0{,}1 \cdot 0{,}1 = 0{,}01 \qquad
+\left(\frac{1}{2}\right)^3 = \frac{1}{2} \cdot \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{8}
+$$
+
+::: {.callout-tip title="Tipp: Potenzieren ist nicht Multiplizieren"}
+$2^3$ bedeutet $2 \cdot 2 \cdot 2 = 8$ und **nicht** $2 \cdot 3 = 6$.
+:::
+
+{{< buch 1.179 1.180 >}}
+
+#### Negative Basis {#sec-potenzregel-negative-basis}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** Lena tippt $-2^2$ in den Taschenrechner und bekommt $-4$.
+Ihr Sitznachbar tippt $(-2)^2$ und bekommt $4$. Hat sich einer der beiden vertippt?
+Nein, beide Ergebnisse stimmen. Es kommt nur darauf an, **was** potenziert wird.
+
+Ist die Basis negativ, entscheidet die Anzahl der Faktoren über das Vorzeichen.
+Jeweils zwei Minus ergeben zusammen ein Plus:
+:::
+
+**Beispiel:**
+
+$$
+(-2)^1 = -2 \qquad (-2)^2 = (-2) \cdot (-2) = 4 \qquad
+(-2)^3 = (-2) \cdot (-2) \cdot (-2) = -8 \qquad (-2)^4 = 16
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.callout-important title="Merke"}
+- Exponent **gerade**: Das Ergebnis ist **positiv**.
+- Exponent **ungerade**: Das Ergebnis ist **negativ**.
+
+$$
+(-a)^n = \begin{cases} a^n & \text{wenn } n \text{ gerade} \\
+-a^n & \text{wenn } n \text{ ungerade} \end{cases}
+$$
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Die Klammer ist dabei entscheidend. Ohne Klammer gehört der Exponent nur zur Zahl,
+nicht zum Minus. Wegen „Potenz vor Strich“ wird zuerst potenziert und erst dann das
+Minus davorgeschrieben:
+:::
+
+**Beispiel:**
+
+$$
+(-3)^2 = (-3) \cdot (-3) = 9 \qquad -3^2 = -(3 \cdot 3) = -9
+$$
+
+#### Potenzen mit gleicher Basis {#sec-potenzen-gleiche-basis}
+
+::: {.content-hidden when-format="revealjs"}
+Für alle folgenden Regeln gilt: $a, b \neq 0$ und $m, n \in \mathbb{N}$.
+
+**Einführungsbeispiel:** Was ergibt $2^3 \cdot 2^4$? Man schreibt beide Potenzen aus
+und zählt die Faktoren:
+
+$$
+2^3 \cdot 2^4 = (2 \cdot 2 \cdot 2) \cdot (2 \cdot 2 \cdot 2 \cdot 2) = 2^7
+$$
+
+Zuerst sind es $3$ Faktoren, dann kommen $4$ dazu. Insgesamt sind es $3 + 4 = 7$.
+:::
+
+::: {.callout-important title="Merke"}
+Potenzen mit **gleicher Basis** werden **multipliziert**, indem man die **Exponenten
+addiert**.
+
+$$
+a^n \cdot a^m = a^{n + m}
+$$
+:::
+
+**Beispiel:**
+
+$$
+2^3 \cdot 2^4 = 2^{3 + 4} = 2^7 \qquad 10^2 \cdot 10^5 = 10^7 \qquad
+x^4 \cdot x = x^{4 + 1} = x^5
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Beim Dividieren schreibt man die Potenzen als Bruch und kürzt. Von den $5$ Faktoren
+im Zähler fallen $2$ weg, es bleiben $5 - 2 = 3$ übrig:
+
+$$
+\frac{2^5}{2^2} = \frac{2 \cdot 2 \cdot 2 \cdot 2 \cdot 2}{2 \cdot 2} = 2 \cdot 2 \cdot 2 = 2^3
+$$
+:::
+
+::: {.callout-important title="Merke"}
+Potenzen mit **gleicher Basis** werden **dividiert**, indem man die **Exponenten
+subtrahiert**.
+
+$$
+\frac{a^n}{a^m} = a^{n - m}
+$$
+:::
+
+**Beispiel:**
+
+$$
+\frac{2^5}{2^2} = 2^{5 - 2} = 2^3 \qquad \frac{10^8}{10^5} = 10^3 \qquad
+\frac{x^6}{x} = x^{6 - 1} = x^5
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.callout-tip title="Tipp: Nur bei gleicher Basis, nur bei Punktrechnung"}
+- Bei **verschiedenen Basen** gibt es keine solche Regel: $2^3 \cdot 5^2$ lässt sich
+  nicht zu einer Potenz zusammenfassen.
+- Beim **Addieren und Subtrahieren** gibt es auch keine: $2^3 + 2^4 = 8 + 16 = 24$,
+  aber $2^7 = 128$.
+:::
+
+#### Potenz eines Produkts und eines Bruchs {#sec-potenz-produkt-bruch}
+
+::: {.content-hidden when-format="revealjs"}
+Steht ein Produkt in der Klammer, darf man die Faktoren umordnen:
+
+$$
+(2 \cdot 5)^3 = (2 \cdot 5) \cdot (2 \cdot 5) \cdot (2 \cdot 5)
+= 2 \cdot 2 \cdot 2 \cdot 5 \cdot 5 \cdot 5 = 2^3 \cdot 5^3
+$$
+:::
+
+::: {.callout-important title="Merke"}
+Ein **Produkt** wird potenziert, indem man **jeden Faktor** potenziert.
+
+$$
+(a \cdot b)^n = a^n \cdot b^n
+$$
+:::
+
+**Beispiel:**
+
+$$
+(2 \cdot 5)^3 = 2^3 \cdot 5^3 = 8 \cdot 125 = 1\,000 \qquad (3x)^2 = 3^2 \cdot x^2 = 9x^2
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.callout-important title="Merke"}
+Ein **Bruch** wird potenziert, indem man **Zähler und Nenner** potenziert.
+
+$$
+\left(\frac{a}{b}\right)^n = \frac{a^n}{b^n}
+$$
+:::
+
+**Beispiel:**
+
+$$
+\left(\frac{2}{3}\right)^3 = \frac{2^3}{3^3} = \frac{8}{27} \qquad
+\left(\frac{x}{5}\right)^2 = \frac{x^2}{5^2} = \frac{x^2}{25}
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.callout-tip title="Tipp: Nicht bei Summen"}
+Für eine Summe in der Klammer gilt die Regel **nicht**:
+$(2 + 3)^2 = 5^2 = 25$, aber $2^2 + 3^2 = 4 + 9 = 13$.
+:::
+
+#### Potenz einer Potenz {#sec-potenz-einer-potenz}
+
+::: {.content-hidden when-format="revealjs"}
+Bei $(2^3)^2$ wird die Potenz $2^3$ zweimal als Faktor geschrieben. Das sind $2$ mal
+$3$ Faktoren, also $2 \cdot 3 = 6$:
+
+$$
+(2^3)^2 = 2^3 \cdot 2^3 = (2 \cdot 2 \cdot 2) \cdot (2 \cdot 2 \cdot 2) = 2^6
+$$
+:::
+
+::: {.callout-important title="Merke"}
+Potenzen werden **potenziert**, indem man die **Exponenten multipliziert**.
+
+$$
+(a^n)^m = a^{n \cdot m}
+$$
+:::
+
+**Beispiel:**
+
+$$
+(2^3)^2 = 2^{3 \cdot 2} = 2^6 = 64 \qquad (10^2)^4 = 10^8 \qquad (x^5)^3 = x^{15}
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.callout-tip title="Tipp: Addieren oder multiplizieren?"}
+$x^5 \cdot x^3 = x^{5 + 3} = x^8$, aber $(x^5)^3 = x^{5 \cdot 3} = x^{15}$.
+:::
+
+#### Exponent null {#sec-exponent-null}
+
+::: {.content-hidden when-format="revealjs"}
+Dividiert man eine Zahl durch sich selbst, kommt $1$ heraus. Rechnet man dieselbe
+Division mit der Regel für gleiche Basen, erhält man den Exponenten $0$:
+
+$$
+\frac{2^3}{2^3} = 1 \qquad \frac{2^3}{2^3} = 2^{3 - 3} = 2^0
+$$
+
+Beide Rechnungen müssen dasselbe ergeben, also ist $2^0 = 1$.
+:::
+
+::: {.callout-important title="Merke"}
+**Alles hoch $0$ ist $1$.**
+
+$$
+a^0 = 1
+$$
+:::
+
+**Beispiel:**
+
+$$
+5^0 = 1 \qquad (-7)^0 = 1 \qquad \left(\frac{2}{3}\right)^0 = 1 \qquad -7^0 = -1
+$$
+
+::: {.content-hidden when-format="revealjs"}
+Beim letzten Beispiel fehlt die Klammer: Nur die $7$ wird hoch $0$ genommen, das
+Minus bleibt stehen.
+:::
+
+#### Negative Exponenten {#sec-negative-exponenten}
+
+::: {.content-hidden when-format="revealjs"}
+Was passiert, wenn beim Dividieren unten mehr Faktoren stehen als oben? Durch Kürzen
+bleibt ein Bruch übrig, mit der Regel für gleiche Basen erhält man einen negativen
+Exponenten:
+
+$$
+\frac{2^2}{2^5} = \frac{2 \cdot 2}{2 \cdot 2 \cdot 2 \cdot 2 \cdot 2} = \frac{1}{2^3}
+\qquad \frac{2^2}{2^5} = 2^{2 - 5} = 2^{-3}
+$$
+
+Beide Rechnungen müssen dasselbe ergeben, also ist $2^{-3} = \frac{1}{2^3}$.
+:::
+
+::: {.callout-important title="Merke"}
+Ein **negativer Exponent** bedeutet **Kehrwert**: Die Potenz wechselt die Seite des
+Bruchstrichs, und der Exponent wird positiv.
+
+$$
+a^{-n} = \frac{1}{a^n} \qquad \frac{1}{a^{-n}} = a^n
+$$
+:::
+
+**Beispiel:**
+
+$$
+2^{-3} = \frac{1}{2^3} = \frac{1}{8} \qquad 10^{-2} = \frac{1}{10^2} = 0{,}01 \qquad
+\frac{1}{5^{-2}} = 5^2 = 25
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.callout-tip title="Tipp: Ein negativer Exponent macht nichts negativ"}
+$2^{-3} = \frac{1}{8}$ ist eine **positive** Zahl. Das Minus im Exponenten hat nichts
+mit dem Vorzeichen des Ergebnisses zu tun.
+:::
+
+{{< buch 1.183-1.187 >}}
