@@ -1395,3 +1395,168 @@ mit dem Vorzeichen des Ergebnisses zu tun.
 :::
 
 {{< buch 1.183-1.187 >}}
+
+### Zehnerpotenzen und Gleitkommadarstellung {#sec-zehnerpotenzen-gleitkomma}
+
+#### Zehnerpotenzen {#sec-zehnerpotenzen}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** Ein Unternehmen macht $2\,000\,000$ € Umsatz, ein
+Bakterium ist $0{,}000\,002$ m lang. Bei so großen und so kleinen Zahlen verzählt man
+sich leicht bei den Nullen. Mit **Zehnerpotenzen** (Potenzen mit der Basis $10$)
+schreibt man sie kürzer. Schreibt man die Zehnerpotenzen aus, sieht man, wie sie
+aufgebaut sind:
+:::
+
+**Beispiel:**
+
+$$
+10^1 = 10 \qquad 10^2 = 10 \cdot 10 = 100 \qquad 10^3 = 10 \cdot 10 \cdot 10 = 1\,000
+\qquad 10^6 = 1\,000\,000
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+**Beispiel:**
+
+$$
+10^0 = 1 \qquad 10^{-1} = \frac{1}{10} = 0{,}1 \qquad 10^{-2} = \frac{1}{100} = 0{,}01
+\qquad 10^{-3} = \frac{1}{1\,000} = 0{,}001
+$$
+
+::: {.callout-important title="Merke"}
+- $10^n$ ist eine $1$ mit $n$ **Nullen**: $10^4 = 10\,000$
+- $10^{-n}$ ist eine Dezimalzahl, bei der die $1$ an der $n$-ten **Nachkommastelle**
+  steht: $10^{-4} = 0{,}0001$
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Multipliziert man eine Zahl mit $10$, wird jede Ziffer zehnmal so viel wert. Das Komma
+rutscht dabei um eine Stelle nach rechts: $3{,}45 \cdot 10 = 34{,}5$. Bei $10^2 = 100$
+rutscht es um zwei Stellen, bei $10^3$ um drei usw. Ein negativer Exponent bedeutet
+Dividieren, dann rutscht das Komma nach links.
+:::
+
+::: {.callout-important title="Merke"}
+Multipliziert man eine Zahl mit einer Zehnerpotenz, verschiebt man das **Komma**:
+
+- $\cdot\, 10^n$: um $n$ Stellen nach **rechts** (die Zahl wird größer)
+- $\cdot\, 10^{-n}$: um $n$ Stellen nach **links** (die Zahl wird kleiner)
+
+Fehlende Stellen werden mit Nullen aufgefüllt.
+:::
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+**Beispiel:**
+
+$$
+3{,}45 \cdot 10^2 = 345 \qquad 2{,}7 \cdot 10^4 = 27\,000 \qquad
+5{,}8 \cdot 10^{-3} = 0{,}0058 \qquad 46 \cdot 10^{-1} = 4{,}6
+$$
+
+{{< buch 1.199 1.202 1.203 1.204 >}}
+
+#### Gleitkommadarstellung {#sec-gleitkommadarstellung}
+
+::: {.content-hidden when-format="revealjs"}
+**Einführungsbeispiel:** Dieselbe Zahl lässt sich mit Zehnerpotenzen auf viele Arten
+schreiben. Je nachdem, wohin man das Komma setzt, ändert sich der Exponent:
+
+$$
+45\,000 = 45 \cdot 10^3 = 4{,}5 \cdot 10^4 = 0{,}45 \cdot 10^5
+$$
+
+Das Komma „gleitet“ durch die Zahl, deshalb heißt diese Schreibweise
+**Gleitkommadarstellung**.
+:::
+
+::: {.callout-note title="Definition: Gleitkommadarstellung"}
+In der **Gleitkommadarstellung** wird eine Zahl als Produkt aus einer Dezimalzahl und
+einer Zehnerpotenz geschrieben.
+
+$$
+z = a \cdot 10^n \qquad n \in \mathbb{Z}
+$$
+
+Die Zahl $a$ heißt **Mantisse**, $n$ heißt **Exponent**.
+:::
+
+**Beispiel:**
+
+$$
+45\,000 = 45 \cdot 10^3 = 4{,}5 \cdot 10^4 = 0{,}45 \cdot 10^5 \qquad
+0{,}03 = 3 \cdot 10^{-2} = 30 \cdot 10^{-3}
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Damit jede Zahl nur eine Schreibweise hat, legt man fest, dass vor dem Komma genau
+eine Ziffer steht, die nicht null ist. So lassen sich Zahlen auf einen Blick
+vergleichen: Der Exponent zeigt sofort die Größenordnung.
+:::
+
+::: {.callout-note title="Definition: Normierte Gleitkommadarstellung"}
+In der **normierten Gleitkommadarstellung** steht vor dem Komma der Mantisse
+**genau eine Ziffer ungleich null**.
+
+$$
+z = a \cdot 10^n \qquad 1 \leq |a| < 10, \quad n \in \mathbb{Z}
+$$
+:::
+
+**Beispiel:**
+
+$$
+45\,000 = 4{,}5 \cdot 10^4 \qquad 380\,000\,000 = 3{,}8 \cdot 10^8 \qquad
+0{,}00072 = 7{,}2 \cdot 10^{-4} \qquad -0{,}05 = -5 \cdot 10^{-2}
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.callout-important title="Merke"}
+So bringt man eine Zahl in die normierte Gleitkommadarstellung:
+
+1. Das Komma so verschieben, dass genau eine Ziffer ungleich null davor steht.
+2. Die Anzahl der Stellen, um die das Komma verschoben wurde, ist der Exponent.
+3. Große Zahl (Komma nach **links** verschoben): Exponent **positiv**.
+   Kleine Zahl (Komma nach **rechts** verschoben): Exponent **negativ**.
+:::
+
+::: {.content-hidden when-format="revealjs"}
+Ist eine Zahl schon in Gleitkommadarstellung, aber nicht normiert, verschiebt man das
+Komma der Mantisse und gleicht den Exponenten aus: Wird die Mantisse um eine Stelle
+kleiner, wird der Exponent um $1$ größer, und umgekehrt.
+:::
+
+**Beispiel:**
+
+$$
+32{,}5 \cdot 10^3 = 3{,}25 \cdot 10^4 \qquad 0{,}6 \cdot 10^{-2} = 6 \cdot 10^{-3}
+\qquad 470 \cdot 10^{-5} = 4{,}7 \cdot 10^{-3}
+$$
+
+::: {.content-visible when-format="revealjs"}
+* * *
+:::
+
+::: {.callout-tip title="Tipp: Gleitkommadarstellung am Taschenrechner"}
+Sehr große und sehr kleine Ergebnisse zeigt der Taschenrechner in normierter
+Gleitkommadarstellung an, oft mit einem „E“ für den Exponenten:
+`3.8E8` bedeutet $3{,}8 \cdot 10^8$, `7.2E-4` bedeutet $7{,}2 \cdot 10^{-4}$.
+:::
+
+{{< buch 1.207 1.213 1.214 1.215 1.216 >}}
